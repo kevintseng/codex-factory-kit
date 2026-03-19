@@ -2,7 +2,9 @@
 
 Codex Factory Kit is a Codex-native workflow layer for people who want more than a loose collection of prompts.
 
-It turns larger tasks into a staged loop:
+It gives Codex a staged operating model instead of a one-shot prompt habit.
+
+It turns larger tasks into a loop:
 
 1. bootstrap context
 2. sharpen the problem
@@ -14,6 +16,52 @@ It turns larger tasks into a staged loop:
 8. write a retro
 
 It also includes a lightweight mode for small tasks so you do not pay the full process cost every time.
+
+## Who This Is For
+
+This is for you if:
+
+- you use Codex on real repos, not just toy prompts
+- you want planning, review, QA, and documentation to compound instead of resetting every session
+- you want repo-local working memory in `.codex/context/`
+- you want small tasks to stay fast while bigger tasks become more reliable
+
+This is probably not for you if every task is a tiny one-file edit and you do not want any persistent workflow artifacts.
+
+## The Core Idea
+
+Most AI coding setups fail the same way: every turn tries to reconstruct the whole task from scratch.
+
+Codex Factory Kit fixes that by adding durable artifacts inside each repo:
+
+- `PRODUCT.md`
+- `PLAN.md`
+- `TESTPLAN.md`
+- `REVIEW.jsonl`
+- `RELEASE.md`
+- `RETRO.md`
+
+That gives you:
+
+- better multi-session continuity
+- cleaner handoffs between main agent and subagents
+- explicit review and QA evidence
+- less repeated explanation
+
+## What The Workflow Looks Like
+
+```text
+Vague task
+  -> office-hours-codex
+  -> PRODUCT.md
+  -> sprint-conductor
+  -> PLAN.md + TESTPLAN.md
+  -> implementation
+  -> review-gate
+  -> qa-runtime
+  -> document-release
+  -> retro
+```
 
 ## What Is Included
 
@@ -41,13 +89,6 @@ The main idea is simple: persistent artifacts beat re-explaining the task every 
 
 Instead of asking Codex to hold the whole project in short-term context every time, keep working artifacts in `.codex/context/` inside each repo:
 
-- `PRODUCT.md`
-- `PLAN.md`
-- `TESTPLAN.md`
-- `REVIEW.jsonl`
-- `RELEASE.md`
-- `RETRO.md`
-
 This makes handoffs, review, QA, and follow-up work materially more stable.
 
 ## Install
@@ -74,6 +115,32 @@ cp ~/.codex/AGENTS.factory-kit.md ~/.codex/AGENTS.md
 
 Only do that if you want this workflow to become your default Codex operating model.
 
+## Quick Start
+
+1. Install the kit:
+
+```bash
+git clone https://github.com/kevintseng/codex-factory-kit.git
+cd codex-factory-kit
+./install.sh
+```
+
+2. Optionally adopt the suggested global policy:
+
+```bash
+cp ~/.codex/AGENTS.factory-kit.md ~/.codex/AGENTS.md
+```
+
+3. In a repo you care about, initialize local working memory:
+
+```bash
+mkdir -p .codex/context
+cp ~/.codex/templates/factory/PLAN.md .codex/context/PLAN.md
+printf '\n.codex/context/\n' >> .gitignore
+```
+
+4. Use the lightweight loop for small tasks and the full loop for risky or multi-step tasks.
+
 ## Per-Repo Adoption
 
 Inside a repo, initialize:
@@ -90,6 +157,26 @@ printf '\n.codex/context/\n' >> .gitignore
 ```
 
 You can also use the `bootstrap-context` skill to do this incrementally without overwriting existing artifacts.
+
+## Example Task Flow
+
+Example: you ask Codex to fix a flaky checkout route.
+
+Without a workflow layer:
+
+- the agent may patch code immediately
+- tests and runtime verification may be implicit or skipped
+- next session has to reconstruct what changed and what remains risky
+
+With Codex Factory Kit:
+
+1. `sprint-conductor` writes a concrete `PLAN.md`
+2. `review-gate` records findings into `REVIEW.jsonl`
+3. `qa-runtime` records actual verification evidence in `TESTPLAN.md`
+4. `document-release` updates release notes if behavior changed
+5. `retro` captures what slowed the work down
+
+For more concrete examples, see [docs/examples.md](docs/examples.md).
 
 ## Default Loop
 
@@ -119,6 +206,29 @@ In lightweight mode:
 3. skip `TESTPLAN.md`, `RELEASE.md`, and `RETRO.md` unless the task grows
 4. skip `review-gate` for trivial local work unless risk rises
 
+## Repo-Local Agents
+
+This repo does not ship your repo-specific specialist packs.
+
+The intended model is:
+
+- keep shared workflow skills global in `~/.codex/skills/`
+- keep project-specific agents in `<repo>/.codex/agents/`
+- keep working memory in `<repo>/.codex/context/`
+
+That separation lets you publish the reusable operating model without leaking private project context.
+
+## Public-Friendly By Design
+
+This repository intentionally excludes:
+
+- private project prompts
+- repo-local domain agent packs
+- personal logs, sessions, auth, or Codex state
+- any app-specific code from your private repos
+
+It is the reusable layer only.
+
 ## Publishing Model
 
 This repo intentionally does not include private repo-local agent packs or personal project context. It is the reusable layer only.
@@ -137,9 +247,19 @@ This repo intentionally does not include private repo-local agent packs or perso
 │   ├── qa-runtime/
 │   ├── document-release/
 │   └── retro/
+├── docs/
+│   ├── adoption.md
+│   ├── examples.md
+│   └── share.md
 └── templates/
     └── factory/
 ```
+
+## Docs
+
+- [Adoption notes](docs/adoption.md)
+- [Usage examples](docs/examples.md)
+- [Share copy](docs/share.md)
 
 ## License
 
