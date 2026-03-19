@@ -186,6 +186,7 @@ With Codex Factory Kit:
 5. `retro` captures what slowed the work down
 
 For more concrete examples, see [docs/examples.md](docs/examples.md).
+For a more realistic before/after artifact walkthrough, see [docs/demo.md](docs/demo.md).
 
 ## Default Loop
 
@@ -267,6 +268,7 @@ This repo intentionally does not include private repo-local agent packs or perso
 ## Docs
 
 - [Adoption notes](docs/adoption.md)
+- [Concrete demo](docs/demo.md)
 - [Usage examples](docs/examples.md)
 - [Share copy](docs/share.md)
 

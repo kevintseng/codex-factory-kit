@@ -38,6 +38,61 @@ Repo:
 
 https://github.com/kevintseng/codex-factory-kit
 
+## X Post
+
+I open-sourced `codex-factory-kit`, a workflow layer for using Codex on real repos.
+
+It adds:
+
+- repo-local working memory in `.codex/context/`
+- staged execution instead of one-shot prompting
+- review gates
+- runtime QA evidence
+- release + retro artifacts
+- a lightweight mode for small tasks
+
+Repo:
+https://github.com/kevintseng/codex-factory-kit
+
+## LinkedIn / GitHub Post
+
+I open-sourced `codex-factory-kit`, a Codex-native workflow layer for real repositories.
+
+The goal is simple: make Codex behave less like a stateless prompt loop and more like a staged engineering workflow.
+
+It includes:
+
+- global Codex skills for planning, review, QA, release notes, and retros
+- repo-local working memory in `.codex/context/`
+- reusable templates for `PRODUCT.md`, `PLAN.md`, `TESTPLAN.md`, `REVIEW.jsonl`, `RELEASE.md`, and `RETRO.md`
+- a lightweight mode for smaller tasks
+
+Repo:
+https://github.com/kevintseng/codex-factory-kit
+
+## Traditional Chinese Post
+
+我把最近整理的 Codex enhancement 公開成一個 repo 了：
+
+`codex-factory-kit`
+https://github.com/kevintseng/codex-factory-kit
+
+我想解的問題很直接：
+很多 AI coding workflow 都太依賴單次 prompt，結果每個 session 都在重建上下文。
+
+這個 repo 做的事是把 Codex 工作流拆成幾個可持續的階段：
+
+- bootstrap context
+- sharpen the problem
+- plan execution
+- implement with repo-local agents
+- review gate
+- runtime QA
+- document release
+- retro
+
+另外也有 lightweight mode，所以小任務不用每次都跑完整流程。
+
 ## Longer Post
 
 I wanted a better way to use Codex on real projects than just stacking prompts and hoping context survives.
