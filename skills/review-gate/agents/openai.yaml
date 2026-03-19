@@ -1,0 +1,5 @@
+interface:
+  display_name: "Review Gate"
+  short_description: "Gate work with structured findings and pass/fail status"
+  default_prompt: "Review this change set, write REVIEW.jsonl entries, and return a final gate status."
+

@@ -1,0 +1,2 @@
+{"ts":"2026-03-19T00:00:00Z","scope":"path-or-feature","status":"PASS|PASS_WITH_CONCERNS|FAIL","severity":"info|low|medium|high|critical","finding":"Short finding summary","evidence":"file:line or command result","fix":"Smallest recommended fix","residual_risk":"What remains uncertain"}
+

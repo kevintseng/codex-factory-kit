@@ -1,0 +1,5 @@
+interface:
+  display_name: "Bootstrap Context"
+  short_description: "Initialize .codex/context from the factory templates"
+  default_prompt: "Create any missing .codex/context artifacts for this repo from the global factory templates."
+

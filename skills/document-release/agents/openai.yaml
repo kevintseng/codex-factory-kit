@@ -1,0 +1,4 @@
+interface:
+  display_name: "Document Release"
+  short_description: "Update release notes and docs after behavior changes"
+  default_prompt: "Update RELEASE.md and any stale docs affected by this change."

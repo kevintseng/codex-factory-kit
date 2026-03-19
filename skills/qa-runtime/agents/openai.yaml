@@ -1,0 +1,5 @@
+interface:
+  display_name: "QA Runtime"
+  short_description: "Run targeted runtime QA and record evidence"
+  default_prompt: "Verify this workflow at runtime, update TESTPLAN.md with evidence, and report remaining gaps."
+

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Office Hours Codex"
+  short_description: "Turn vague product asks into a sharp build brief"
+  default_prompt: "Reframe this request into a narrow product wedge and write the PRODUCT.md artifact."
+

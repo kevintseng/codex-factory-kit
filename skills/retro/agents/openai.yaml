@@ -1,0 +1,4 @@
+interface:
+  display_name: "Retro"
+  short_description: "Capture what shipped, what hurt, and what to improve"
+  default_prompt: "Write or refresh RETRO.md for this completed workflow."

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Sprint Conductor"
+  short_description: "Turn a task into a staged Codex execution plan"
+  default_prompt: "Plan this task, write PLAN.md and TESTPLAN.md artifacts, and route the work to the right repo-local agents."
+
