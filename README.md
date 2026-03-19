@@ -2,6 +2,8 @@
 
 Codex Factory Kit is a Codex-native workflow layer for people who want more than a loose collection of prompts.
 
+Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+
 It gives Codex a staged operating model instead of a one-shot prompt habit.
 
 It turns larger tasks into a loop:
@@ -88,6 +90,13 @@ Vague task
 The main idea is simple: persistent artifacts beat re-explaining the task every turn.
 
 Instead of asking Codex to hold the whole project in short-term context every time, keep working artifacts in `.codex/context/` inside each repo:
+
+- `PRODUCT.md`
+- `PLAN.md`
+- `TESTPLAN.md`
+- `REVIEW.jsonl`
+- `RELEASE.md`
+- `RETRO.md`
 
 This makes handoffs, review, QA, and follow-up work materially more stable.
 
