@@ -2,11 +2,11 @@
 
 ## One-Line Description
 
-Codex Factory Kit gives Codex a staged workflow with repo-local working memory, a first-class task router, structured review, QA evidence, and a lightweight mode for small tasks.
+Codex Factory Kit gives Codex a staged workflow with repo-local working memory, a first-class task router, a local release-check and upgrade layer, a narrow-scope safety layer, structured review, QA evidence, and a lightweight mode for small tasks.
 
 ## GitHub Repo Description
 
-Codex-native factory workflow, routing skills, and templates for staged execution
+Codex-native factory workflow, routing skills, safety checks, upgrade tooling, and templates for staged execution
 
 ## GitHub Topics
 
@@ -28,6 +28,8 @@ I published `codex-factory-kit`, a Codex-native workflow layer for real repos.
 It adds:
 
 - `factory-router` for task routing and model-fit guidance
+- `freeze` + `guard` for narrow-scope safety checks
+- `factory-kit-upgrade` for local version reporting, published-release checks, safe refresh, and downgrade protection
 - repo-local working memory in `.codex/context/`
 - staged execution instead of one-shot prompting
 - structured review gates
@@ -46,6 +48,8 @@ I open-sourced `codex-factory-kit`, a workflow layer for using Codex on real rep
 It adds:
 
 - `factory-router` for task routing and model-fit guidance
+- `freeze` + `guard` for narrow-scope safety checks
+- `factory-kit-upgrade` for local version reporting, published-release checks, safe refresh, and downgrade protection
 - repo-local working memory in `.codex/context/`
 - staged execution instead of one-shot prompting
 - review gates
@@ -65,6 +69,8 @@ The goal is simple: make Codex behave less like a stateless prompt loop and more
 It includes:
 
 - a shipped `factory-router` skill for lightweight vs full-loop classification and model-fit guidance
+- a shipped safety layer with `freeze` and `guard` for narrow-scope risky changes
+- a shipped `factory-kit-upgrade` skill for local version reporting, published-release checks, safe refresh, and downgrade protection
 - global Codex skills for planning, review, QA, release notes, and retros
 - repo-local working memory in `.codex/context/`
 - reusable templates for `PRODUCT.md`, `PLAN.md`, `TESTPLAN.md`, `REVIEW.jsonl`, `RELEASE.md`, and `RETRO.md`
@@ -87,6 +93,7 @@ https://github.com/kevintseng/codex-factory-kit
 
 - bootstrap context
 - factory router
+- freeze / guard safety layer
 - sharpen the problem
 - plan execution
 - implement with repo-local agents
@@ -108,6 +115,8 @@ So I packaged the workflow layer I have been using into a public repo:
 What it does:
 
 - adds a shipped `factory-router` skill for lightweight vs full-loop classification and model-fit guidance
+- adds shipped `freeze` and `guard` skills for narrow-scope risky changes
+- adds a shipped `factory-kit-upgrade` skill for local version reporting, published-release checks, safe refresh, and downgrade protection
 - adds global Codex skills for planning, review, QA, release notes, and retros
 - adds reusable templates for `PRODUCT.md`, `PLAN.md`, `TESTPLAN.md`, `REVIEW.jsonl`, `RELEASE.md`, and `RETRO.md`
 - keeps project-specific agents local to each repo

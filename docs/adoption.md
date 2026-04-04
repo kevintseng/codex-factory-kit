@@ -14,6 +14,13 @@ Then read:
 
 Merge that into `~/.codex/AGENTS.md` only if you want the factory loop to become the default.
 
+If you want to verify what is installed later, use:
+
+```bash
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh status
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh check-updates
+```
+
 ## Recommended Repo Setup
 
 For repos where you want persistent working memory:
@@ -56,3 +63,17 @@ For non-trivial work, the best entry point is now:
 2. `factory-router` to decide lightweight versus full mode and the required gates
 3. `office-hours-codex` only if the ask is still vague
 4. `sprint-conductor` to turn the chosen route into `PLAN.md` and `TESTPLAN.md`
+
+## Upgrade Recommendation
+
+When the repo checkout has moved forward and you want your installed kit to catch up:
+
+```bash
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh upgrade
+```
+
+This refreshes the selected `CODEX_HOME` from the current repo checkout. It does not overwrite repo-local `.codex/context/` artifacts or your existing `~/.codex/AGENTS.md`.
+
+If you run the installed upgrade script from outside the source checkout, it can reuse the stored source path from install metadata. If that source path is no longer valid, pass `--source-repo /path/to/codex-factory-kit` explicitly.
+
+If you only want to know whether a newer published release exists, use `check-updates`. It compares your local state against the configured GitHub release authority and writes the result to `~/.codex/factory-kit/update-state.json`.
