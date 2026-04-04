@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security Review"
+  short_description: "Apply a security and trust-boundary governance lens on top of review-gate"
+  default_prompt: "Review this change as a security governance overlay on top of review-gate. Focus on trust boundaries, secrets handling, mutation safety, and abuse surface, then append findings to REVIEW.jsonl with a gate result."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Founder Review"
+  short_description: "Apply a founder and product-value governance lens on top of review-gate"
+  default_prompt: "Review this change as a founder/product-owner overlay on top of review-gate. Focus on user value, scope discipline, adoption fit, and messaging honesty, then append findings to REVIEW.jsonl with a gate result."

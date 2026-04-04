@@ -88,3 +88,17 @@ If you only want to know whether a newer published release exists, use `check-up
 Do not treat every retro point as durable memory.
 
 Use `learn` only when the lesson should affect future routing, review, QA, release, or safety behavior. Keep the durable store repo-local in `.codex/context/LEARNINGS.jsonl`, use `learn sync-context` to write relevant guidance into `PLAN.md` and `TESTPLAN.md`, and deactivate stale guidance instead of silently rewriting policy files.
+
+## Governance Recommendation
+
+Use `review-gate` as the default merge or ship gate.
+
+When the shipped wedge needs a stronger non-correctness lens, add a governance overlay instead of replacing the base gate:
+
+- `release-review` for versioning, changelog honesty, rollout safety, and upgrade impact
+- `founder-review` for user value, scope discipline, adoption fit, and messaging honesty
+- `eng-review` for maintainability, integration quality, and rollback posture
+- `design-review` for workflow clarity, ergonomics, and naming coherence
+- `security-review` for trust boundaries, mutation safety, and abuse surface
+
+These overlays are intentionally thin. They should add one explicit lens on top of `review-gate`, not create a second standalone review workflow.

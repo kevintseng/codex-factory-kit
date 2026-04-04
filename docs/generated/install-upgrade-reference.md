@@ -15,16 +15,21 @@
 ## Installed Skills
 
 - `bootstrap-context`
+- `design-review`
 - `document-release`
+- `eng-review`
 - `factory-kit-upgrade`
 - `factory-router`
+- `founder-review`
 - `freeze`
 - `guard`
 - `learn`
 - `office-hours-codex`
 - `qa-runtime`
+- `release-review`
 - `retro`
 - `review-gate`
+- `security-review`
 - `sprint-conductor`
 
 ## Installed Templates

@@ -233,3 +233,25 @@ Why:
 - the lesson is reusable across tasks, not just one session note
 - the durable store should change future QA expectations
 - stale guidance can be deactivated instead of leaving contradictory memory active
+
+## Example 9: Add A Governance Overlay Before Ship
+
+Task:
+
+> A release-impacting feature is functionally complete, but you want a release-readiness and product-value lens before merge.
+
+Recommended mode:
+
+- full mode with governance overlays
+
+Expected flow:
+
+1. `review-gate`
+2. `release-review`
+3. optional `founder-review`
+
+Why:
+
+- correctness review and governance review are different jobs
+- release policy, changelog honesty, and upgrade impact may need their own explicit pass
+- founder-value questions should stay a thin overlay, not replace engineering review

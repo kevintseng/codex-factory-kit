@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Review"
+  short_description: "Apply a design and workflow-UX governance lens on top of review-gate"
+  default_prompt: "Review this change as a design/workflow-UX governance overlay on top of review-gate. Focus on clarity, ergonomics, naming, and user-facing coherence, then append findings to REVIEW.jsonl with a gate result."

@@ -74,6 +74,8 @@ Treat `.codex/context/` as local working memory by default unless the repo or te
 - Findings first.
 - Prefer precise evidence over broad warnings.
 - Emit clear gate status: `PASS`, `PASS_WITH_CONCERNS`, or `FAIL`.
+- Optional governance overlays can add a founder, engineering, design, security, or release lens on top of `review-gate`.
+- Governance overlays must remain thin and repo-truth-first; they do not replace `review-gate`.
 
 ## QA Policy
 

@@ -17,6 +17,17 @@
   - `.codex/context/LEARNINGS.jsonl`
 - Executables: none
 
+## Design Review
+
+- Skill name: `design-review`
+- Contract summary: Use when a design or workflow-UX governance lens should review clarity, ergonomics, naming, and user-facing coherence before ship. This is a thin overlay on top of `review-gate`, not a replacement.
+- Manifest summary: Apply a design and workflow-UX governance lens on top of review-gate
+- Repo-local artifacts:
+  - `.codex/context/REVIEW.jsonl`
+  - `.codex/context/PLAN.md`
+  - `.codex/context/RELEASE.md`
+- Executables: none
+
 ## Document Release
 
 - Skill name: `document-release`
@@ -25,6 +36,17 @@
 - Repo-local artifacts:
   - `.codex/context/RELEASE.md`
   - `$CODEX_HOME/templates/factory/RELEASE.md`
+- Executables: none
+
+## Engineering Review
+
+- Skill name: `eng-review`
+- Contract summary: Use when an engineering governance lens should review maintainability, operability, integration quality, and long-term coherence before ship. This is a thin overlay on top of `review-gate`, not a replacement.
+- Manifest summary: Apply an engineering leadership governance lens on top of review-gate
+- Repo-local artifacts:
+  - `.codex/context/REVIEW.jsonl`
+  - `.codex/context/PLAN.md`
+  - `.codex/context/TESTPLAN.md`
 - Executables: none
 
 ## Factory Kit Upgrade
@@ -42,6 +64,16 @@
 - Contract summary: Use when a task needs an explicit route before implementation. Classifies the task into lightweight or full mode, declares required downstream skills, and adds model-fit guidance to the same routing envelope.
 - Manifest summary: Classify a task into the right factory route before implementation starts
 - Repo-local artifacts: none declared
+- Executables: none
+
+## Founder Review
+
+- Skill name: `founder-review`
+- Contract summary: Use when a founder or product-owner governance lens should review user value, scope discipline, adoption fit, and messaging before ship. This is a thin overlay on top of `review-gate`, not a replacement.
+- Manifest summary: Apply a founder and product-value governance lens on top of review-gate
+- Repo-local artifacts:
+  - `.codex/context/REVIEW.jsonl`
+  - `.codex/context/RELEASE.md` when release framing matters
 - Executables: none
 
 ## Freeze
@@ -95,6 +127,18 @@
   - `$CODEX_HOME/templates/factory/TESTPLAN.md`
 - Executables: none
 
+## Release Review
+
+- Skill name: `release-review`
+- Contract summary: Use when a release-readiness governance lens should review versioning, changelog accuracy, rollout safety, upgrade impact, and release-note honesty before ship. This is a thin overlay on top of `review-gate`, not a replacement.
+- Manifest summary: Apply a release-readiness governance lens on top of review-gate
+- Repo-local artifacts:
+  - `.codex/context/REVIEW.jsonl`
+  - `.codex/context/RELEASE.md`
+  - `CHANGELOG.md`
+  - `VERSION`
+- Executables: none
+
 ## Retro
 
 - Skill name: `retro`
@@ -113,6 +157,17 @@
 - Repo-local artifacts:
   - `.codex/context/REVIEW.jsonl`
   - `$CODEX_HOME/templates/factory/REVIEW.jsonl.example`
+- Executables: none
+
+## Security Review
+
+- Skill name: `security-review`
+- Contract summary: Use when a security governance lens should review trust boundaries, secrets handling, mutation safety, and abuse surface before ship. This is a thin overlay on top of `review-gate`, not a replacement.
+- Manifest summary: Apply a security and trust-boundary governance lens on top of review-gate
+- Repo-local artifacts:
+  - `.codex/context/REVIEW.jsonl`
+  - `.codex/context/TESTPLAN.md`
+  - `.codex/context/FREEZE.md` when the scope was deliberately narrowed
 - Executables: none
 
 ## Sprint Conductor
