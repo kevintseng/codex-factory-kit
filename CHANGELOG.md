@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+
+- `learn` now accepts `--context-dir` before or after the subcommand, so installed dogfood flows no longer fail on a common argument order
+
 ## 0.2.0 - 2026-04-04
 
 ### Added

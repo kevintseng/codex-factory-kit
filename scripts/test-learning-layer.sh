@@ -96,10 +96,22 @@ recommend_output="$(
 assert_contains "$recommend_output" "\"task_class\": \"checkout_flow\""
 assert_contains "$recommend_output" "\"recommended_action\": \"Set needs_qa_runtime=true and verification_level=browser.\""
 
-sync_output="$(
-  python3 "$SCRIPT_PATH" --context-dir "$CONTEXT_DIR" sync-context \
+recommend_with_deferred_context="$(
+  python3 "$SCRIPT_PATH" recommend \
     --task-class checkout_flow \
-    --tag browser
+    --tag browser \
+    --format jsonl \
+    --context-dir "$CONTEXT_DIR"
+)"
+
+assert_contains "$recommend_with_deferred_context" "\"task_class\": \"checkout_flow\""
+assert_contains "$recommend_with_deferred_context" "\"recommended_action\": \"Set needs_qa_runtime=true and verification_level=browser.\""
+
+sync_output="$(
+  python3 "$SCRIPT_PATH" sync-context \
+    --task-class checkout_flow \
+    --tag browser \
+    --context-dir "$CONTEXT_DIR"
 )"
 
 assert_contains "$sync_output" "matched_count=1"

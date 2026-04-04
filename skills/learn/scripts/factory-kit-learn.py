@@ -368,6 +368,29 @@ def add_common_learning_fields(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--confidence", choices=["low", "medium", "high"], default="medium")
 
 
+def normalize_global_args(argv: list[str]) -> list[str]:
+    normalized: list[str] = []
+    deferred: list[str] = []
+    index = 0
+
+    while index < len(argv):
+        current = argv[index]
+        if current == "--context-dir":
+            if index + 1 >= len(argv):
+                raise SystemExit("--context-dir requires a value.")
+            deferred.extend([current, argv[index + 1]])
+            index += 2
+            continue
+        if current.startswith("--context-dir="):
+            deferred.append(current)
+            index += 1
+            continue
+        normalized.append(current)
+        index += 1
+
+    return deferred + normalized
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Manage durable repo-local learnings for Codex Factory Kit."
@@ -435,7 +458,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> int:
     parser = build_parser()
-    args = parser.parse_args()
+    args = parser.parse_args(normalize_global_args(sys.argv[1:]))
     return args.func(args)
 
 
