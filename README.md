@@ -4,7 +4,7 @@ Codex Factory Kit is a Codex-native workflow layer for people who want more than
 
 Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-It gives Codex a staged operating model instead of a one-shot prompt habit, and now includes a first-class router for choosing the right path before implementation begins.
+It gives Codex a staged operating model instead of a one-shot prompt habit, and now includes a first-class router for choosing the right path before implementation begins plus a safety layer for keeping risky edits inside a narrow boundary.
 
 It turns larger tasks into a loop:
 
@@ -12,11 +12,13 @@ It turns larger tasks into a loop:
 2. route the task
 3. sharpen the problem if needed
 4. plan execution
-5. implement with repo-local agents
-6. gate with structured review
-7. verify at runtime
-8. update release notes and docs
-9. write a retro
+5. optionally freeze scope for risky narrow changes
+6. implement with repo-local agents
+7. guard the diff against the frozen boundary
+8. gate with structured review
+9. verify at runtime
+10. update release notes and docs
+11. write a retro
 
 It also includes a lightweight mode for small tasks so you do not pay the full process cost every time, plus model-fit guidance so planning and gates can stay stronger than bounded worker execution.
 
@@ -43,6 +45,7 @@ Codex Factory Kit fixes that by adding durable artifacts inside each repo:
 - `REVIEW.jsonl`
 - `RELEASE.md`
 - `RETRO.md`
+- `FREEZE.md` when you need to scope-lock a risky change
 
 That gives you:
 
@@ -60,7 +63,9 @@ Vague task
   -> PRODUCT.md
   -> sprint-conductor
   -> PLAN.md + TESTPLAN.md
+  -> optional freeze
   -> implementation
+  -> optional guard
   -> review-gate
   -> qa-runtime
   -> document-release
@@ -72,6 +77,9 @@ Vague task
 - global skills for Codex:
   - `bootstrap-context`
   - `factory-router`
+  - `factory-kit-upgrade`
+  - `freeze`
+  - `guard`
   - `office-hours-codex`
   - `sprint-conductor`
   - `review-gate`
@@ -85,6 +93,7 @@ Vague task
   - `REVIEW.jsonl.example`
   - `RELEASE.md`
   - `RETRO.md`
+  - `FREEZE.md`
 - a suggested global `AGENTS.md` policy
 - an installer that copies skills and templates into `~/.codex`
 
@@ -116,6 +125,7 @@ This installs:
 - `skills/*` into `~/.codex/skills/`
 - `templates/factory/*` into `~/.codex/templates/factory/`
 - `AGENTS.md` into `~/.codex/AGENTS.factory-kit.md`
+- `VERSION` and `CHANGELOG.md` into `~/.codex/factory-kit/`
 
 The installer does not overwrite your existing `~/.codex/AGENTS.md`.
 
@@ -158,6 +168,15 @@ For non-trivial work, start with `factory-router` when you want the kit to class
 - lightweight mode or full mode
 - required follow-up skills
 - model-fit expectations for lead and worker execution
+- whether `freeze` / `guard` should be used to keep the blast radius narrow
+
+To inspect the installed version or refresh your local install from this repo checkout:
+
+```bash
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh status
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh check-updates
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh upgrade
+```
 
 ## Per-Repo Adoption
 
@@ -205,10 +224,53 @@ Its job is to classify a task before implementation begins:
 
 - lightweight mode or full mode
 - whether `office-hours-codex`, `review-gate`, `qa-runtime`, `document-release`, and `retro` are required
+- whether `freeze` and `guard` should be used to scope-lock risky work
 - whether the work should stay local or can be split into bounded parallel slices
 - which model class should lead the task and which class can safely execute bounded work
 
 This is soft orchestration, not hidden automation. The router helps Codex choose the right workflow and quality bar; it does not claim platform-level interception or destructive auto-execution.
+
+## Freeze And Guard
+
+The kit now ships a basic safety layer:
+
+- `freeze` creates `.codex/context/FREEZE.md` with allowed paths, blocked paths, and protected invariants
+- `guard` checks the current diff against that freeze contract before the final gate
+
+This is for risky narrow-scope work in large repos, not for every tiny edit. The goal is to make blast-radius control explicit and checkable.
+
+## Versioning, Release Checks, And Upgrade
+
+The kit now ships a local upgrade foundation plus a first release-check layer:
+
+- top-level `VERSION`
+- top-level `CHANGELOG.md`
+- installed metadata under `~/.codex/factory-kit/`
+- `factory-kit-upgrade` for status, release checks, and local refresh from a repo checkout
+
+What it does today:
+
+- report the repo version and installed version
+- compare local versions against the latest published GitHub release
+- persist update-check state in `~/.codex/factory-kit/update-state.json`
+- detect the selected `CODEX_HOME`
+- reuse the stored source checkout path from install metadata when available
+- refresh the installed skill pack and templates from the current repo checkout
+
+What it does not do yet:
+
+- auto-upgrade without an explicit command
+- proactively prompt or snooze update checks
+- rewrite repo-local `.codex/context/` artifacts
+- overwrite `~/.codex/AGENTS.md`
+
+Use `check-updates` when you want the latest published release check without changing the install:
+
+```bash
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh check-updates
+```
+
+If the current repo checkout is older than the installed version, `upgrade` refuses by default and requires `--allow-downgrade`.
 
 ## Default Loop
 
@@ -217,12 +279,14 @@ Use the full loop when the task is multi-step, risky, or touches multiple surfac
 1. `bootstrap-context`
 2. `factory-router` when the route is not already obvious
 3. `office-hours-codex` for vague asks
-4. `sprint-conductor`
-5. implementation with repo-local agents
-6. `review-gate`
-7. `qa-runtime`
-8. `document-release`
-9. `retro`
+4. `freeze` when the blast radius should stay narrow
+5. `sprint-conductor`
+6. implementation with repo-local agents
+7. `guard` when a freeze contract exists
+8. `review-gate`
+9. `qa-runtime`
+10. `document-release`
+11. `retro`
 
 ## Lightweight Mode
 
@@ -270,11 +334,16 @@ This repo intentionally does not include private repo-local agent packs or perso
 
 ```text
 .
+├── VERSION
+├── CHANGELOG.md
 ├── AGENTS.md
 ├── install.sh
 ├── skills/
 │   ├── bootstrap-context/
 │   ├── factory-router/
+│   ├── factory-kit-upgrade/
+│   ├── freeze/
+│   ├── guard/
 │   ├── office-hours-codex/
 │   ├── sprint-conductor/
 │   ├── review-gate/
@@ -287,6 +356,7 @@ This repo intentionally does not include private repo-local agent packs or perso
 │   └── share.md
 └── templates/
     └── factory/
+        └── FREEZE.md
 ```
 
 ## Docs

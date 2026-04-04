@@ -145,3 +145,30 @@ Why:
 - the task is multi-surface and browser-facing
 - final routing, integration, and gating should stay on the stronger path
 - bounded implementation slices can still be delegated to a balanced worker path
+
+## Example 6: Refresh The Installed Kit
+
+Task:
+
+> I updated my local `codex-factory-kit` repo and want my installed `~/.codex` pack to match it.
+
+Recommended first step:
+
+- `factory-kit-upgrade`
+
+Expected commands:
+
+```bash
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh status
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh check-updates
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh upgrade
+```
+
+Why:
+
+- the upgrade foundation compares the repo `VERSION` with the installed metadata
+- the release-check layer compares local versions with the latest published release
+- the refresh targets only the selected `CODEX_HOME`
+- the workflow does not overwrite repo-local `.codex/context/` artifacts or `~/.codex/AGENTS.md`
+
+If the installed version is newer than the current checkout, the command refuses the overwrite unless you explicitly pass `--allow-downgrade`.

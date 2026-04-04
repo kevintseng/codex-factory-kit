@@ -78,6 +78,11 @@ Treat `.codex/context/` as local working memory by default unless the repo or te
 - Keep docs and release notes aligned with actual shipped behavior.
 - Do not invent capabilities, workflows, or guarantees in documentation.
 
+## Release Policy
+
+- Cut releases only for shipped functional improvements, meaningful feature additions, or real bug fixes.
+- Do not cut releases for docs-only cleanup, messaging changes, PR workflow changes, or internal planning work.
+
 ## Open Source Boundary
 
 - Keep the public repo limited to shipped skills, installer behavior, templates, code, and user-facing docs.

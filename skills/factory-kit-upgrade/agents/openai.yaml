@@ -1,0 +1,4 @@
+interface:
+  display_name: "Factory Kit Upgrade"
+  short_description: "Inspect, release-check, or refresh a local Codex Factory Kit install from a repo checkout"
+  default_prompt: "Check the installed Codex Factory Kit version, compare it with the latest published release, and, if needed, upgrade the selected CODEX_HOME from this repo checkout."
