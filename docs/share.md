@@ -4,6 +4,8 @@
 
 Codex Factory Kit gives Codex a staged workflow with repo-local working memory, a first-class task router, a local release-check and upgrade layer, a narrow-scope safety layer, a reusable learning layer, structured review, QA evidence, and a lightweight mode for small tasks.
 
+Current public line: `v0.2.1`, dogfooded through the installed upgrade and published-release check flow.
+
 ## GitHub Repo Description
 
 Codex-native factory workflow, routing skills, safety checks, learning layer, upgrade tooling, and templates for staged execution
@@ -39,6 +41,7 @@ It adds:
 - runtime QA evidence
 - release + retro artifacts
 - a lightweight mode for small tasks
+- a dogfooded installed upgrade path through the released `v0.2.x` line
 
 Repo:
 
@@ -62,6 +65,7 @@ It adds:
 - runtime QA evidence
 - release + retro artifacts
 - a lightweight mode for small tasks
+- a dogfooded installed upgrade path through the released `v0.2.x` line
 
 Repo:
 https://github.com/kevintseng/codex-factory-kit
@@ -84,6 +88,7 @@ It includes:
 - repo-local working memory in `.codex/context/`
 - reusable templates for `PRODUCT.md`, `PLAN.md`, `TESTPLAN.md`, `REVIEW.jsonl`, `RELEASE.md`, and `RETRO.md`
 - a lightweight mode for smaller tasks
+- a dogfooded installed upgrade path through the released `v0.2.x` line
 
 Repo:
 https://github.com/kevintseng/codex-factory-kit
@@ -136,6 +141,8 @@ What it does:
 - supports a lightweight mode so small tasks do not feel process-heavy
 
 The goal is simple: make Codex work more like a software factory and less like a stateless prompt loop.
+
+The current public line has also been dogfooded through its own installed upgrade and published-release check flow.
 
 Repo:
 

@@ -83,6 +83,26 @@ If you run the installed upgrade script from outside the source checkout, it can
 
 If you only want to know whether a newer published release exists, use `check-updates`. It compares your local state against the configured GitHub release authority and writes the result to `~/.codex/factory-kit/update-state.json`.
 
+## Dogfood Recommendation
+
+After a local refresh or a newly published release, close the loop with the installed script rather than assuming the install is current:
+
+```bash
+~/.codex/skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh status
+~/.codex/skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh check-updates
+~/.codex/skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh upgrade
+~/.codex/skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh status
+```
+
+That gives you four checks in order:
+
+1. what source checkout and installed version are currently detected
+2. what the latest published release is
+3. whether the installed kit can refresh safely from the selected checkout
+4. whether the installed state is back to `current`
+
+The current public line has been dogfooded this way through `v0.2.1`.
+
 ## Learning Recommendation
 
 Do not treat every retro point as durable memory.

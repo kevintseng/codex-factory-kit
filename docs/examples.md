@@ -255,3 +255,26 @@ Why:
 - correctness review and governance review are different jobs
 - release policy, changelog honesty, and upgrade impact may need their own explicit pass
 - founder-value questions should stay a thin overlay, not replace engineering review
+
+## Example 10: Dogfood The Installed Release
+
+Task:
+
+> I just released a patch and want to make sure the installed `~/.codex` kit is truly current.
+
+Recommended mode:
+
+- lightweight operational verification
+
+Expected flow:
+
+1. `factory-kit-upgrade status`
+2. `factory-kit-upgrade check-updates`
+3. `factory-kit-upgrade upgrade` if the install is behind
+4. `factory-kit-upgrade status` again
+
+Why:
+
+- release metadata and installed state can drift even when the repo checkout is current
+- the upgrade flow should be dogfooded on the installed kit, not only on the repo script path
+- the expected end state is `installed_version=current` and `update_available=no`
