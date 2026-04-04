@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.0 - 2026-04-04
+
 ### Added
 
 - `factory-router` as the first shipped vNext capability, with integrated model-fit routing guidance
