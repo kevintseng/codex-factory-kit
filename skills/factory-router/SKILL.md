@@ -67,6 +67,12 @@ Use `full` when any are true:
 
 Require `office-hours-codex` when the request is still vague, product-shaped, or underspecified.
 
+### Bootstrap Context
+
+Require `needs_bootstrap_context: true` when `.codex/context/` does not exist in the repo yet.
+
+Otherwise use `false`.
+
 ### Plan And Test Plan
 
 - Require `PLAN.md` for non-trivial work.
@@ -108,6 +114,11 @@ Use `bounded_parallel` only when:
 - the user explicitly allows delegation or parallel work
 - at least two independent subproblems exist
 - the critical path can still move locally
+
+Use `review_only` when:
+
+- the user explicitly wants a second opinion or delegated review
+- the main implementation path should still remain local
 
 Otherwise keep the critical path local.
 
