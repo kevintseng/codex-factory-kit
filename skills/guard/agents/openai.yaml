@@ -1,0 +1,4 @@
+interface:
+  display_name: "Guard"
+  short_description: "Check whether the current diff stayed inside a freeze contract"
+  default_prompt: "Run the guard check against .codex/context/FREEZE.md and report PASS or FAIL with concrete violating files."

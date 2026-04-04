@@ -3,6 +3,7 @@
 ## Routing Snapshot
 - Verification level:
 - Model fit:
+- Freeze / guard:
 - QA runtime required:
 - Review gate required:
 

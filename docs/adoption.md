@@ -62,7 +62,10 @@ For non-trivial work, the best entry point is now:
 1. `bootstrap-context` if the repo still lacks `.codex/context/`
 2. `factory-router` to decide lightweight versus full mode and the required gates
 3. `office-hours-codex` only if the ask is still vague
-4. `sprint-conductor` to turn the chosen route into `PLAN.md` and `TESTPLAN.md`
+4. `freeze` when the blast radius should stay deliberately narrow
+5. `sprint-conductor` to turn the chosen route into `PLAN.md` and `TESTPLAN.md`
+
+If the work is risky but intentionally narrow, add `.codex/context/FREEZE.md` before implementation and run `guard` before the final review gate.
 
 ## Upgrade Recommendation
 
