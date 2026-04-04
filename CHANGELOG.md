@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.2 - 2026-04-05
+
 ### Fixed
 
 - installer and local upgrade flows now prune only retired factory-kit-owned skills and templates while preserving unrelated user-owned items under `~/.codex`

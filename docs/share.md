@@ -4,7 +4,7 @@
 
 Codex Factory Kit gives Codex a staged workflow with repo-local working memory, a first-class task router, a local release-check and upgrade layer, a narrow-scope safety layer, a reusable learning layer, structured review, QA evidence, and a lightweight mode for small tasks.
 
-Current public line: `v0.2.1`, dogfooded through the installed upgrade and published-release check flow.
+Current public line: `v0.2.2`, dogfooded through the installed upgrade and published-release check flow.
 
 ## GitHub Repo Description
 

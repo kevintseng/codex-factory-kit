@@ -101,7 +101,7 @@ That gives you four checks in order:
 3. whether the installed kit can refresh safely from the selected checkout
 4. whether the installed state is back to `current`
 
-The current public line has been dogfooded this way through `v0.2.1`.
+The current public line has been dogfooded this way through `v0.2.2`.
 
 ## Learning Recommendation
 
