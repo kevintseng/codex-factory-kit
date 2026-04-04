@@ -9,6 +9,8 @@
 - `factory-kit-upgrade check-updates` as the first shipped release-check layer against the latest published GitHub release
 - `learn` as the first shipped learning layer with repo-local `LEARNINGS.jsonl`, retro promotion workflow, and durable recommendation/deactivation commands
 - `learn sync-context` to write relevant guidance into `PLAN.md` and `TESTPLAN.md`
+- generated contract references for the skill index, capability matrix, AGENTS routing snippet, and install/upgrade contract
+- `scripts/generate-factory-contracts.py` plus `scripts/test-generated-contracts.sh`
 
 ### Changed
 

@@ -101,6 +101,7 @@ Codex Factory Kit 的做法，是在每個 repo 裡加入可持續存在的 arti
   - `FREEZE.md`
 - 一份建議用的全域 `AGENTS.md` policy
 - 一個會把 skills 與 templates 複製進 `~/.codex` 的安裝腳本
+- 放在 `docs/generated/` 下的 generated contract references
 
 ## 為什麼這樣做
 

@@ -1,6 +1,6 @@
 ---
 name: "learn"
-description: "Use when a completed task or retro exposes guidance that should persist across tasks. Promotes reusable learnings into `.codex/context/LEARNINGS.jsonl`, lists them, recommends relevant ones for a new task, and can deactivate stale guidance."
+description: "Use when a completed task or retro exposes guidance that should persist across tasks. Promotes reusable learnings into `.codex/context/LEARNINGS.jsonl`, recommends relevant guidance for a new task, syncs it into current planning artifacts, and can deactivate stale entries."
 ---
 
 # Learn
