@@ -1,4 +1,4 @@
 interface:
   display_name: "Factory Router"
   short_description: "Classify a task into the right factory route before implementation starts"
-  default_prompt: "Route this task into lightweight or full mode, emit the factory routing envelope with model-fit guidance, and identify the required follow-up skills."
+  default_prompt: "Route this task into lightweight or full mode, emit the factory routing envelope with model-fit plus freeze/guard guidance, and identify the required follow-up skills."

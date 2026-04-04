@@ -5,6 +5,7 @@
 - Task class:
 - Complexity / risk / verification:
 - Model fit:
+- Freeze / guard:
 - Required follow-up skills:
 
 ## Goal

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Freeze"
+  short_description: "Create a narrow-scope freeze contract before risky edits"
+  default_prompt: "Create or refresh .codex/context/FREEZE.md with the allowed paths, blocked paths, invariants, and exit criteria for this task."

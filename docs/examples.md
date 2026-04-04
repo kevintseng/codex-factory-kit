@@ -172,3 +172,35 @@ Why:
 - the workflow does not overwrite repo-local `.codex/context/` artifacts or `~/.codex/AGENTS.md`
 
 If the installed version is newer than the current checkout, the command refuses the overwrite unless you explicitly pass `--allow-downgrade`.
+
+## Example 7: Keep A Risky Change Inside One Boundary
+
+Task:
+
+> Update one auth middleware path in a large repo and avoid collateral edits elsewhere.
+
+Recommended mode:
+
+- full mode with safety layer
+
+Expected artifacts:
+
+- `PLAN.md`
+- `TESTPLAN.md`
+- `FREEZE.md`
+- `REVIEW.jsonl`
+
+Expected flow:
+
+1. `factory-router`
+2. `freeze`
+3. `sprint-conductor`
+4. implementation inside the frozen scope
+5. `guard`
+6. `review-gate`
+
+Why:
+
+- the task is risky even if the intended scope is small
+- the freeze contract makes the allowed edit boundary explicit
+- the guard check turns “stay in this area only” into a real verification step

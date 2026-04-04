@@ -45,6 +45,8 @@ Required fields:
 - `needs_qa_runtime`: boolean
 - `needs_document_release`: boolean
 - `needs_retro`: boolean
+- `suggest_freeze`: boolean
+- `suggest_guard`: boolean
 - `subagent_strategy`: `none | bounded_parallel | review_only`
 - `cloud_delegate_strategy`: `none | suggest`
 - `task_class`: short stable label such as `small_fix`, `multi_surface_feature`, `risky_backend_change`
@@ -53,6 +55,8 @@ Required fields:
 - `verification_level`: `minimal | targeted | runtime | browser`
 - `model_fit.lead_model_class`: `light | balanced | strong`
 - `model_fit.worker_model_class`: `light | balanced | strong | none`
+- `suggest_freeze`: whether the task should scope-lock edits before implementation
+- `suggest_guard`: whether the current diff should be checked against a freeze contract before final gate
 - `reasoning`: short human-readable explanation
 
 Example:
@@ -67,6 +71,8 @@ Example:
   "needs_qa_runtime": true,
   "needs_document_release": true,
   "needs_retro": true,
+  "suggest_freeze": true,
+  "suggest_guard": true,
   "subagent_strategy": "bounded_parallel",
   "cloud_delegate_strategy": "none",
   "task_class": "multi_surface_feature",
@@ -193,7 +199,9 @@ When the router runs before implementation:
 
 1. Refresh or add a `Routing Snapshot` section in `.codex/context/PLAN.md`.
 2. If `needs_testplan` is true, refresh or add the matching routing and verification posture in `.codex/context/TESTPLAN.md`.
-3. Pass the route forward to `sprint-conductor` so the execution plan and verification plan inherit the same assumptions.
+3. If `suggest_freeze` is true, carry that into the routing snapshot and route to `freeze` before implementation starts.
+4. If `suggest_guard` is true, carry that into the routing snapshot and route to `guard` before the final review or completion summary.
+5. Pass the route forward to `sprint-conductor` so the execution plan and verification plan inherit the same assumptions.
 
 The snapshot should capture:
 
@@ -201,6 +209,7 @@ The snapshot should capture:
 - task class
 - complexity, risk, and verification levels
 - model-fit choice
+- freeze / guard recommendation
 - required downstream skills
 
 ## Workflow
@@ -210,6 +219,7 @@ The snapshot should capture:
 3. Update the routing snapshot in `PLAN.md`, and in `TESTPLAN.md` when required.
 4. Route to the next skill:
    - `office-hours-codex` when the ask is still vague
+   - `freeze` when the blast radius should be scope-locked before implementation
    - `sprint-conductor` when implementation should proceed
 5. Keep later gates explicit instead of implied.
 
