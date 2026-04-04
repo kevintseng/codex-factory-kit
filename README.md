@@ -4,20 +4,21 @@ Codex Factory Kit is a Codex-native workflow layer for people who want more than
 
 Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-It gives Codex a staged operating model instead of a one-shot prompt habit.
+It gives Codex a staged operating model instead of a one-shot prompt habit, and now includes a first-class router for choosing the right path before implementation begins.
 
 It turns larger tasks into a loop:
 
 1. bootstrap context
-2. sharpen the problem
-3. plan execution
-4. implement with repo-local agents
-5. gate with structured review
-6. verify at runtime
-7. update release notes and docs
-8. write a retro
+2. route the task
+3. sharpen the problem if needed
+4. plan execution
+5. implement with repo-local agents
+6. gate with structured review
+7. verify at runtime
+8. update release notes and docs
+9. write a retro
 
-It also includes a lightweight mode for small tasks so you do not pay the full process cost every time.
+It also includes a lightweight mode for small tasks so you do not pay the full process cost every time, plus model-fit guidance so planning and gates can stay stronger than bounded worker execution.
 
 ## Who This Is For
 
@@ -54,6 +55,7 @@ That gives you:
 
 ```text
 Vague task
+  -> factory-router
   -> office-hours-codex
   -> PRODUCT.md
   -> sprint-conductor
@@ -69,6 +71,7 @@ Vague task
 
 - global skills for Codex:
   - `bootstrap-context`
+  - `factory-router`
   - `office-hours-codex`
   - `sprint-conductor`
   - `review-gate`
@@ -150,6 +153,12 @@ printf '\n.codex/context/\n' >> .gitignore
 
 4. Use the lightweight loop for small tasks and the full loop for risky or multi-step tasks.
 
+For non-trivial work, start with `factory-router` when you want the kit to classify:
+
+- lightweight mode or full mode
+- required follow-up skills
+- model-fit expectations for lead and worker execution
+
 ## Per-Repo Adoption
 
 Inside a repo, initialize:
@@ -188,18 +197,32 @@ With Codex Factory Kit:
 For more concrete examples, see [docs/examples.md](docs/examples.md).
 For a more realistic before/after artifact walkthrough, see [docs/demo.md](docs/demo.md).
 
+## Factory Router
+
+`factory-router` is the first vNext capability that is shipped in the public kit.
+
+Its job is to classify a task before implementation begins:
+
+- lightweight mode or full mode
+- whether `office-hours-codex`, `review-gate`, `qa-runtime`, `document-release`, and `retro` are required
+- whether the work should stay local or can be split into bounded parallel slices
+- which model class should lead the task and which class can safely execute bounded work
+
+This is soft orchestration, not hidden automation. The router helps Codex choose the right workflow and quality bar; it does not claim platform-level interception or destructive auto-execution.
+
 ## Default Loop
 
 Use the full loop when the task is multi-step, risky, or touches multiple surfaces:
 
 1. `bootstrap-context`
-2. `office-hours-codex` for vague asks
-3. `sprint-conductor`
-4. implementation with repo-local agents
-5. `review-gate`
-6. `qa-runtime`
-7. `document-release`
-8. `retro`
+2. `factory-router` when the route is not already obvious
+3. `office-hours-codex` for vague asks
+4. `sprint-conductor`
+5. implementation with repo-local agents
+6. `review-gate`
+7. `qa-runtime`
+8. `document-release`
+9. `retro`
 
 ## Lightweight Mode
 
@@ -251,6 +274,7 @@ This repo intentionally does not include private repo-local agent packs or perso
 ├── install.sh
 ├── skills/
 │   ├── bootstrap-context/
+│   ├── factory-router/
 │   ├── office-hours-codex/
 │   ├── sprint-conductor/
 │   ├── review-gate/

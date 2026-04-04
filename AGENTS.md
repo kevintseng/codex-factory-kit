@@ -2,6 +2,12 @@
 
 Use the factory workflow by default when the task is more than a trivial one-step edit.
 
+For non-trivial work that needs explicit route selection, start with `factory-router` to classify:
+
+- lightweight mode or full mode
+- required follow-up skills
+- model-fit expectations for lead versus worker execution
+
 ## Lightweight Mode
 
 For small, low-risk, single-scope tasks, use lightweight mode instead of the full loop.
@@ -24,15 +30,16 @@ In lightweight mode:
 ## Default Loop
 
 1. If `.codex/context/` does not exist in the repo, use the `bootstrap-context` skill first.
-2. For vague product or feature asks, use the `office-hours-codex` skill first.
-3. For implementation work, use the `sprint-conductor` skill to create or refresh:
+2. When the task needs explicit routing, use `factory-router` before implementation planning.
+3. For vague product or feature asks, use the `office-hours-codex` skill first.
+4. For implementation work, use the `sprint-conductor` skill to create or refresh:
    - `.codex/context/PLAN.md`
    - `.codex/context/TESTPLAN.md`
-4. Prefer repo-local agents in `.codex/agents/` before falling back to generic global agents.
-5. Before merge- or ship-sensitive completion, use `review-gate`.
-6. If UI, browser, route, or end-to-end behavior changed, use `qa-runtime`.
-7. If behavior, setup, operations, or external contracts changed, use `document-release`.
-8. After ship or a major completed workflow, use `retro`.
+5. Prefer repo-local agents in `.codex/agents/` before falling back to generic global agents.
+6. Before merge- or ship-sensitive completion, use `review-gate`.
+7. If UI, browser, route, or end-to-end behavior changed, use `qa-runtime`.
+8. If behavior, setup, operations, or external contracts changed, use `document-release`.
+9. After ship or a major completed workflow, use `retro`.
 
 ## Artifact Convention
 
@@ -70,3 +77,9 @@ Treat `.codex/context/` as local working memory by default unless the repo or te
 
 - Keep docs and release notes aligned with actual shipped behavior.
 - Do not invent capabilities, workflows, or guarantees in documentation.
+
+## Open Source Boundary
+
+- Keep the public repo limited to shipped skills, installer behavior, templates, code, and user-facing docs.
+- Keep internal planning notes, design explorations, roadmap drafts, and unpublished vNext concept material out of the public repo by default.
+- Treat `docs/vnext/` as internal working material unless it is deliberately productized into shipped user-facing docs.
