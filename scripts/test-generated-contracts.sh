@@ -39,6 +39,8 @@ with open(sys.argv[1], "r", encoding="utf-8") as handle:
     data = json.load(handle)
 assert "factory-router" in data["skills"]
 assert "learn" in data["skills"]
+assert "founder-review" in data["skills"]
+assert "release-review" in data["skills"]
 assert "LEARNINGS.jsonl.example" in data["templates"]
 assert "check-updates" in data["upgrade_commands"]
 PY

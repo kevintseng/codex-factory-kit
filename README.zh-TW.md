@@ -83,6 +83,11 @@ Codex Factory Kit 的做法，是在每個 repo 裡加入可持續存在的 arti
   - `factory-kit-upgrade`
   - `freeze`
   - `guard`
+  - `founder-review`
+  - `eng-review`
+  - `design-review`
+  - `security-review`
+  - `release-review`
   - `learn`
   - `office-hours-codex`
   - `sprint-conductor`
@@ -247,6 +252,18 @@ printf '\n.codex/context/\n' >> .gitignore
 - `guard` 會在最終 gate 前檢查目前 diff 是否符合這份 freeze contract
 
 這適合大型 repo 裡「高風險但範圍刻意很小」的工作，不是每個小修補都要用。
+
+## Governance Role Packs
+
+目前 kit 也提供一組疊加在 `review-gate` 之上的薄治理 overlays：
+
+- `founder-review`
+- `eng-review`
+- `design-review`
+- `security-review`
+- `release-review`
+
+它們不是新的主流程，只是不同 ship 決策視角下的額外 review lens。
 
 ## Learning Layer
 

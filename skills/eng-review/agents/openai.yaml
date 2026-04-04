@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Review"
+  short_description: "Apply an engineering leadership governance lens on top of review-gate"
+  default_prompt: "Review this change as an engineering governance overlay on top of review-gate. Focus on maintainability, integration quality, operability, rollback posture, and long-term coherence, then append findings to REVIEW.jsonl with a gate result."

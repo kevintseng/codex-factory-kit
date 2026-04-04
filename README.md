@@ -83,6 +83,11 @@ Vague task
   - `factory-kit-upgrade`
   - `freeze`
   - `guard`
+  - `founder-review`
+  - `eng-review`
+  - `design-review`
+  - `security-review`
+  - `release-review`
   - `learn`
   - `office-hours-codex`
   - `sprint-conductor`
@@ -248,6 +253,18 @@ The kit now ships a basic safety layer:
 - `guard` checks the current diff against that freeze contract before the final gate
 
 This is for risky narrow-scope work in large repos, not for every tiny edit. The goal is to make blast-radius control explicit and checkable.
+
+## Governance Role Packs
+
+The kit now ships thin governance overlays on top of `review-gate`:
+
+- `founder-review`
+- `eng-review`
+- `design-review`
+- `security-review`
+- `release-review`
+
+These are not replacement workflows. They are optional review lenses for different kinds of ship decisions.
 
 ## Learning Layer
 

@@ -11,12 +11,14 @@
 - `learn sync-context` to write relevant guidance into `PLAN.md` and `TESTPLAN.md`
 - generated contract references for the skill index, capability matrix, AGENTS routing snippet, and install/upgrade contract
 - `scripts/generate-factory-contracts.py` plus `scripts/test-generated-contracts.sh`
+- governance role packs: `founder-review`, `eng-review`, `design-review`, `security-review`, and `release-review`
 
 ### Changed
 
 - `PLAN.md` and `TESTPLAN.md` templates now include a `Routing Snapshot`
 - `PLAN.md` and the factory workflow now carry relevant learnings when reusable guidance exists
 - `PLAN.md` and `TESTPLAN.md` now include a concrete `Relevant Learnings` section for learning integration
+- review policy now treats governance overlays as thin layers on top of `review-gate`, not replacements
 - installed metadata now includes `VERSION` and `CHANGELOG.md` under `~/.codex/factory-kit/`
 - installed metadata now records the source checkout path for safer local refreshes
 - `factory-kit-upgrade` now refuses downgrades by default and reports version relation explicitly
