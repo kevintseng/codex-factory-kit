@@ -1,10 +1,12 @@
 # Codex Factory Kit
 
-Codex Factory Kit is a Codex-native workflow layer for people who want more than a loose collection of prompts.
+Codex Factory Kit is an open-source workflow kit for the Codex community.
+
+It is for people using Codex on real repositories who want a crisper operating model than a loose collection of prompts.
 
 Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-It gives Codex a staged operating model instead of a one-shot prompt habit.
+It helps builders use existing Codex capabilities more deliberately with staged execution, repo-local working memory, structured review, runtime QA evidence, and a lightweight mode for small tasks.
 
 It turns larger tasks into a loop:
 
@@ -88,6 +90,8 @@ Vague task
 ## Why
 
 The main idea is simple: persistent artifacts beat re-explaining the task every turn.
+
+This project is meant as a practical community contribution for people figuring out how to use Codex well on real work, not as a replacement for Codex platform primitives.
 
 Instead of asking Codex to hold the whole project in short-term context every time, keep working artifacts in `.codex/context/` inside each repo:
 
@@ -245,6 +249,8 @@ This repo intentionally does not include private repo-local agent packs or perso
 
 ## Layout
 
+High-level repo shape:
+
 ```text
 .
 ├── AGENTS.md
@@ -264,6 +270,8 @@ This repo intentionally does not include private repo-local agent packs or perso
 └── templates/
     └── factory/
 ```
+
+Each skill directory also includes an `agents/openai.yaml` interface manifest used for the installed Codex surface.
 
 ## Docs
 

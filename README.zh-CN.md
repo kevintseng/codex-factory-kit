@@ -1,10 +1,12 @@
 # Codex Factory Kit
 
-Codex Factory Kit 是一套给 Codex 使用的工作流层，适合不想只靠零散 prompt 工作的人。
+Codex Factory Kit 是一套给 Codex community 使用的开源 workflow kit。
+
+它适合那些在真实 repo 中使用 Codex，并且希望有一套比零散 prompt 更清晰操作模型的人。
 
 Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-它让 Codex 不再只是一次性提示，而是以分阶段方式完成工作。
+它帮助使用者更有意识地运用 Codex 现有能力，通过 staged execution、repo-local working memory、structured review、runtime QA evidence，以及给小任务使用的 lightweight mode 来完成工作。
 
 较大的任务会走这条流程：
 
@@ -88,6 +90,8 @@ Codex Factory Kit 的做法，是在每个 repo 中加入可持续存在的 arti
 ## 为什么这样做
 
 核心原因很简单：持久化的 artifact 比每次重新解释任务更有效。
+
+这个项目想做的是一个实际可用的社区贡献，帮助大家在真实工作中更好地使用 Codex，而不是取代 Codex 平台本身的 primitive。
 
 不要让 Codex 每次都只依赖短期上下文记住整个项目，而是把工作中的 artifact 放在 repo 内的 `.codex/context/`：
 
@@ -240,6 +244,8 @@ printf '\n.codex/context/\n' >> .gitignore
 
 ## 目录结构
 
+高层 repo 结构如下：
+
 ```text
 .
 ├── AGENTS.md
@@ -260,9 +266,12 @@ printf '\n.codex/context/\n' >> .gitignore
     └── factory/
 ```
 
+每个 skill 目录里另外也会有一份 `agents/openai.yaml` 接口配置，用于安装后的 Codex surface。
+
 ## 文档
 
 - [Adoption notes](docs/adoption.md)
+- [Concrete demo](docs/demo.md)
 - [Usage examples](docs/examples.md)
 - [Share copy](docs/share.md)
 
