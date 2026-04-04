@@ -23,6 +23,21 @@ Treat these as local working or draft material unless the user explicitly asks t
 - untracked files
 - `docs/vnext/*` when they are present locally but not tracked in git
 
+## Open Source Boundary
+
+This public repository should expose only the reusable codebase, shipped skills, installer behavior, and the documentation users need in order to understand, install, adopt, and use the kit.
+
+Keep these internal by default unless the user explicitly decides to publish them:
+
+- planning notes
+- design explorations
+- roadmap drafts
+- strategy documents
+- internal evaluation notes
+- unpublished vNext concept material
+
+If a file does not help external users adopt, use, verify, or contribute to the shipped kit, prefer keeping it out of the public repository.
+
 ## Lightweight Mode
 
 For small, low-risk, single-scope tasks, use lightweight mode instead of the full loop.
