@@ -3,6 +3,9 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=factory-kit-sync-lib.sh
+. "$SCRIPT_DIR/factory-kit-sync-lib.sh"
+
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 COMMAND=""
 SOURCE_REPO_OVERRIDE=""
@@ -429,14 +432,6 @@ print_status() {
   printf 'update_available=%s\n' "$update_available"
 }
 
-copy_tree() {
-  local src="$1"
-  local dst="$2"
-
-  mkdir -p "$dst"
-  cp -R "$src"/. "$dst"/
-}
-
 run_upgrade() {
   local installed source_version relation
 
@@ -466,16 +461,17 @@ run_upgrade() {
   mkdir -p "$CODEX_HOME/templates/factory"
   mkdir -p "$CODEX_HOME/factory-kit"
 
-  local skill_dir skill_name
-  for skill_dir in "$SOURCE_REPO"/skills/*; do
-    skill_name="$(basename "$skill_dir")"
-    rm -rf "$CODEX_HOME/skills/$skill_name"
-    copy_tree "$skill_dir" "$CODEX_HOME/skills/$skill_name"
-    printf 'refreshed_skill=%s\n' "$skill_name"
-  done
+  sync_skill_surface \
+    "$SOURCE_REPO/skills" \
+    "$CODEX_HOME/skills" \
+    "$CODEX_HOME/factory-kit/INSTALLED_SKILLS" \
+    "refreshed_skill"
 
-  rm -rf "$CODEX_HOME/templates/factory"
-  copy_tree "$SOURCE_REPO/templates/factory" "$CODEX_HOME/templates/factory"
+  sync_template_surface \
+    "$SOURCE_REPO/templates/factory" \
+    "$CODEX_HOME/templates/factory" \
+    "$CODEX_HOME/factory-kit/INSTALLED_TEMPLATES"
+
   cp "$SOURCE_REPO/AGENTS.md" "$CODEX_HOME/AGENTS.factory-kit.md"
   cp "$SOURCE_REPO/VERSION" "$CODEX_HOME/factory-kit/VERSION"
   write_install_metadata "$SOURCE_REPO"

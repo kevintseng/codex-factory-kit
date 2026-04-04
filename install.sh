@@ -5,26 +5,23 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 
+# shellcheck source=skills/factory-kit-upgrade/scripts/factory-kit-sync-lib.sh
+. "$REPO_ROOT/skills/factory-kit-upgrade/scripts/factory-kit-sync-lib.sh"
+
 mkdir -p "$CODEX_HOME/skills"
 mkdir -p "$CODEX_HOME/templates/factory"
 mkdir -p "$CODEX_HOME/factory-kit"
+sync_skill_surface \
+  "$REPO_ROOT/skills" \
+  "$CODEX_HOME/skills" \
+  "$CODEX_HOME/factory-kit/INSTALLED_SKILLS" \
+  "installed_skill"
 
-copy_tree() {
-  local src="$1"
-  local dst="$2"
+sync_template_surface \
+  "$REPO_ROOT/templates/factory" \
+  "$CODEX_HOME/templates/factory" \
+  "$CODEX_HOME/factory-kit/INSTALLED_TEMPLATES"
 
-  mkdir -p "$dst"
-  cp -R "$src"/. "$dst"/
-}
-
-for skill_dir in "$REPO_ROOT"/skills/*; do
-  skill_name="$(basename "$skill_dir")"
-  rm -rf "$CODEX_HOME/skills/$skill_name"
-  copy_tree "$skill_dir" "$CODEX_HOME/skills/$skill_name"
-  printf 'installed skill: %s\n' "$skill_name"
-done
-
-copy_tree "$REPO_ROOT/templates/factory" "$CODEX_HOME/templates/factory"
 cp "$REPO_ROOT/AGENTS.md" "$CODEX_HOME/AGENTS.factory-kit.md"
 cp "$REPO_ROOT/VERSION" "$CODEX_HOME/factory-kit/VERSION"
 printf '%s\n' "$REPO_ROOT" > "$CODEX_HOME/factory-kit/SOURCE_REPO"

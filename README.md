@@ -302,7 +302,8 @@ What it does today:
 - persist update-check state in `~/.codex/factory-kit/update-state.json`
 - detect the selected `CODEX_HOME`
 - reuse the stored source checkout path from install metadata when available
-- refresh the installed skill pack and templates from the current repo checkout
+- refresh the installed factory-kit-owned skill pack and templates from the current repo checkout
+- prune retired factory-kit-owned skills and templates while leaving unrelated user-owned items in place
 
 What it does not do yet:
 

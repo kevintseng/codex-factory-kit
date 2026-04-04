@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .codex/context/
 docs/vnext/
+.playwright-mcp/

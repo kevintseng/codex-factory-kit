@@ -35,6 +35,15 @@ assert_equals() {
   fi
 }
 
+assert_file_contains() {
+  local file="$1"
+  local needle="$2"
+
+  if ! grep -Fq "$needle" "$file"; then
+    fail "expected $file to contain: $needle"
+  fi
+}
+
 run_status() {
   "$1" status --codex-home "$TMP_CODEX_HOME"
 }
@@ -45,10 +54,36 @@ run_upgrade() {
 
 cd "$REPO_ROOT"
 
+mkdir -p \
+  "$TMP_CODEX_HOME/skills/stale-skill" \
+  "$TMP_CODEX_HOME/skills/custom-skill" \
+  "$TMP_CODEX_HOME/templates/factory"
+printf 'old\n' > "$TMP_CODEX_HOME/skills/stale-skill/SKILL.md"
+printf 'custom\n' > "$TMP_CODEX_HOME/skills/custom-skill/SKILL.md"
+printf 'old\n' > "$TMP_CODEX_HOME/templates/factory/STALE.md"
+printf 'custom\n' > "$TMP_CODEX_HOME/templates/factory/CUSTOM.md"
+mkdir -p "$TMP_CODEX_HOME/factory-kit"
+printf 'stale-skill\n' > "$TMP_CODEX_HOME/factory-kit/INSTALLED_SKILLS"
+printf 'STALE.md\n' > "$TMP_CODEX_HOME/factory-kit/INSTALLED_TEMPLATES"
+
 CODEX_HOME="$TMP_CODEX_HOME" bash ./install.sh
 
 stored_source="$(cat "$TMP_CODEX_HOME/factory-kit/SOURCE_REPO")"
 assert_equals "$stored_source" "$REPO_ROOT" "stored source repo"
+if [ -d "$TMP_CODEX_HOME/skills/stale-skill" ]; then
+  fail "install should prune retired tracked skills"
+fi
+if [ ! -d "$TMP_CODEX_HOME/skills/custom-skill" ]; then
+  fail "install should preserve unrelated custom skills"
+fi
+if [ -f "$TMP_CODEX_HOME/templates/factory/STALE.md" ]; then
+  fail "install should prune retired tracked templates"
+fi
+if [ ! -f "$TMP_CODEX_HOME/templates/factory/CUSTOM.md" ]; then
+  fail "install should preserve unrelated custom templates"
+fi
+assert_file_contains "$TMP_CODEX_HOME/factory-kit/INSTALLED_SKILLS" "factory-router"
+assert_file_contains "$TMP_CODEX_HOME/factory-kit/INSTALLED_TEMPLATES" "PLAN.md"
 
 installed_script="$TMP_CODEX_HOME/skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh"
 status_from_tmp="$(cd /tmp && "$installed_script" status --codex-home "$TMP_CODEX_HOME")"
@@ -82,6 +117,40 @@ allow_output="$(
 )"
 assert_contains "$allow_output" "version_relation=downgrade"
 assert_contains "$allow_output" "installed_version=$(cat "$REPO_ROOT/VERSION")"
+
+mkdir -p "$TMP_CODEX_HOME/skills/stale-skill"
+printf 'old\n' > "$TMP_CODEX_HOME/skills/stale-skill/SKILL.md"
+printf 'custom\n' > "$TMP_CODEX_HOME/templates/factory/CUSTOM.md"
+printf 'old\n' > "$TMP_CODEX_HOME/templates/factory/STALE.md"
+printf '%s\n' \
+  "bootstrap-context" \
+  "factory-router" \
+  "stale-skill" \
+  > "$TMP_CODEX_HOME/factory-kit/INSTALLED_SKILLS"
+printf '%s\n' \
+  "PLAN.md" \
+  "STALE.md" \
+  > "$TMP_CODEX_HOME/factory-kit/INSTALLED_TEMPLATES"
+
+upgrade_cleanup_output="$(
+  ./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh upgrade \
+    --codex-home "$TMP_CODEX_HOME" \
+    --allow-downgrade
+)"
+assert_contains "$upgrade_cleanup_output" "removed_retired_skill=stale-skill"
+assert_contains "$upgrade_cleanup_output" "removed_retired_template=STALE.md"
+if [ -d "$TMP_CODEX_HOME/skills/stale-skill" ]; then
+  fail "upgrade should prune retired tracked skills"
+fi
+if [ ! -d "$TMP_CODEX_HOME/skills/custom-skill" ]; then
+  fail "upgrade should preserve unrelated custom skills"
+fi
+if [ -f "$TMP_CODEX_HOME/templates/factory/STALE.md" ]; then
+  fail "upgrade should prune retired tracked templates"
+fi
+if [ ! -f "$TMP_CODEX_HOME/templates/factory/CUSTOM.md" ]; then
+  fail "upgrade should preserve unrelated custom templates"
+fi
 
 printf '/does/not/exist\n' > "$TMP_CODEX_HOME/factory-kit/SOURCE_REPO"
 unknown_status="$(cd /tmp && "$installed_script" status --codex-home "$TMP_CODEX_HOME")"

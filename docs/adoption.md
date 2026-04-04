@@ -77,7 +77,7 @@ When the repo checkout has moved forward and you want your installed kit to catc
 ./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh upgrade
 ```
 
-This refreshes the selected `CODEX_HOME` from the current repo checkout. It does not overwrite repo-local `.codex/context/` artifacts or your existing `~/.codex/AGENTS.md`.
+This refreshes the selected `CODEX_HOME` from the current repo checkout. It prunes retired factory-kit-owned skills and templates using tracked install metadata, while leaving unrelated user-owned items alone. It does not overwrite repo-local `.codex/context/` artifacts or your existing `~/.codex/AGENTS.md`.
 
 If you run the installed upgrade script from outside the source checkout, it can reuse the stored source path from install metadata. If that source path is no longer valid, pass `--source-repo /path/to/codex-factory-kit` explicitly.
 

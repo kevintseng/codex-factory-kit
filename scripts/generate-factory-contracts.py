@@ -90,7 +90,7 @@ def discover_skill_metadata() -> list[dict]:
         scripts = [
             str(path.relative_to(REPO_ROOT))
             for path in sorted((skill_dir / "scripts").glob("*"))
-            if path.is_file()
+            if path.is_file() and path.stat().st_mode & 0o111
         ]
 
         skills.append(
@@ -227,6 +227,8 @@ def render_install_upgrade_reference(skills: list[dict], templates: list[str]) -
         "- `~/.codex/factory-kit/VERSION`",
         "- `~/.codex/factory-kit/CHANGELOG.md`",
         "- `~/.codex/factory-kit/SOURCE_REPO`",
+        "- `~/.codex/factory-kit/INSTALLED_SKILLS`",
+        "- `~/.codex/factory-kit/INSTALLED_TEMPLATES`",
         "- `~/.codex/factory-kit/update-state.json` after `check-updates` runs",
         "",
         "## Installed Skills",
@@ -239,7 +241,19 @@ def render_install_upgrade_reference(skills: list[dict], templates: list[str]) -
         lines.append(f"- `{template}`")
     lines.extend(["", "## Upgrade Commands", "", "```text"])
     lines.extend(usage_lines)
-    lines.extend(["```", "", "## Safety Contract", "", "- The installer does not overwrite `~/.codex/AGENTS.md`.", "- `factory-kit-upgrade upgrade` refreshes only the selected `CODEX_HOME` root.", "- Human-owned repo files are not rewritten by generated references.", ""])
+    lines.extend(
+        [
+            "```",
+            "",
+            "## Safety Contract",
+            "",
+            "- The installer does not overwrite `~/.codex/AGENTS.md`.",
+            "- `factory-kit-upgrade upgrade` refreshes only the selected `CODEX_HOME` root.",
+            "- Retired factory-kit-owned skills and templates are pruned using tracked install metadata, while unrelated user-owned items are left in place.",
+            "- Human-owned repo files are not rewritten by generated references.",
+            "",
+        ]
+    )
     return "\n".join(lines)
 
 
@@ -256,6 +270,8 @@ def build_install_manifest(skills: list[dict], templates: list[str]) -> dict:
             "VERSION",
             "CHANGELOG.md",
             "SOURCE_REPO",
+            "INSTALLED_SKILLS",
+            "INSTALLED_TEMPLATES",
         ],
         "runtime_state": [
             "update-state.json",

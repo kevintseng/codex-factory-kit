@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Fixed
+
+- installer and local upgrade flows now prune only retired factory-kit-owned skills and templates while preserving unrelated user-owned items under `~/.codex`
+- local Playwright QA artifacts are now ignored by default so routine browser verification does not pollute `git status`
+
 ## 0.2.1 - 2026-04-04
 
 ### Fixed

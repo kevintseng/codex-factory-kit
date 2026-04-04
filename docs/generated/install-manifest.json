@@ -15,7 +15,9 @@
   "installed_metadata": [
     "VERSION",
     "CHANGELOG.md",
-    "SOURCE_REPO"
+    "SOURCE_REPO",
+    "INSTALLED_SKILLS",
+    "INSTALLED_TEMPLATES"
   ],
   "runtime_state": [
     "update-state.json"

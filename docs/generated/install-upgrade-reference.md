@@ -10,6 +10,8 @@
 - `~/.codex/factory-kit/VERSION`
 - `~/.codex/factory-kit/CHANGELOG.md`
 - `~/.codex/factory-kit/SOURCE_REPO`
+- `~/.codex/factory-kit/INSTALLED_SKILLS`
+- `~/.codex/factory-kit/INSTALLED_TEMPLATES`
 - `~/.codex/factory-kit/update-state.json` after `check-updates` runs
 
 ## Installed Skills
@@ -61,4 +63,5 @@ Commands:
 
 - The installer does not overwrite `~/.codex/AGENTS.md`.
 - `factory-kit-upgrade upgrade` refreshes only the selected `CODEX_HOME` root.
+- Retired factory-kit-owned skills and templates are pruned using tracked install metadata, while unrelated user-owned items are left in place.
 - Human-owned repo files are not rewritten by generated references.
