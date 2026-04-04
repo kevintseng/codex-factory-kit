@@ -44,6 +44,8 @@ In lightweight mode:
 
 ## Default Loop
 
+For non-trivial work where the route is not yet obvious, use `factory-router` first.
+
 1. If `.codex/context/` does not exist in the repo, use the `bootstrap-context` skill first.
 2. For vague product or feature asks, use the `office-hours-codex` skill first.
 3. For implementation work, use the `sprint-conductor` skill to create or refresh:
@@ -67,6 +69,7 @@ If a skill behavior changes, review and update together as needed:
 - `skills/<skill>/agents/openai.yaml`
 - `README.md`
 - related docs under `docs/`
+- `AGENTS.md` when the skill changes the default workflow or recommended entry path
 - any factory template whose expected output changed
 
 Do not rename public skill entrypoints casually. Skill names are part of the kit's external interface.

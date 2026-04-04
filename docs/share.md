@@ -2,7 +2,7 @@
 
 ## One-Line Description
 
-Codex Factory Kit is an open-source workflow kit for the Codex community: staged execution, repo-local working memory, review gates, QA evidence, and lightweight mode for small tasks.
+Codex Factory Kit is an open-source workflow kit for the Codex community: task routing, staged execution, repo-local working memory, review gates, QA evidence, and lightweight mode for small tasks.
 
 ## GitHub Repo Description
 
@@ -28,6 +28,7 @@ I open-sourced `codex-factory-kit` as a contribution to the Codex community.
 
 It is a workflow kit for using Codex on real repos with:
 
+- `factory-router` for rule-based task routing
 - repo-local working memory in `.codex/context/`
 - staged execution instead of one-shot prompting
 - structured review gates
@@ -45,6 +46,7 @@ I open-sourced `codex-factory-kit` as a contribution to the Codex community.
 
 It is a workflow kit for using Codex on real repos with:
 
+- `factory-router` for rule-based task routing
 - repo-local working memory in `.codex/context/`
 - staged execution instead of one-shot prompting
 - review gates
@@ -63,6 +65,7 @@ The goal is simple: help people use Codex on real repositories with a clearer op
 
 It includes:
 
+- `factory-router` as a rule-based entry point for non-trivial work
 - global Codex skills for planning, review, QA, release notes, and retros
 - repo-local working memory in `.codex/context/`
 - reusable templates for `PRODUCT.md`, `PLAN.md`, `TESTPLAN.md`, `REVIEW.jsonl`, `RELEASE.md`, and `RETRO.md`
@@ -85,6 +88,7 @@ https://github.com/kevintseng/codex-factory-kit
 
 這個 repo 做的事，是把使用 Codex 的工作流整理成幾個可持續的階段：
 
+- factory-router
 - bootstrap context
 - sharpen the problem
 - plan execution
@@ -108,6 +112,7 @@ So I packaged the workflow layer I have been using into a public repo as a contr
 
 What it does:
 
+- adds `factory-router` as a rule-based entry point for non-trivial tasks
 - adds global Codex skills for planning, review, QA, release notes, and retros
 - adds reusable templates for `PRODUCT.md`, `PLAN.md`, `TESTPLAN.md`, `REVIEW.jsonl`, `RELEASE.md`, and `RETRO.md`
 - keeps project-specific agents local to each repo
