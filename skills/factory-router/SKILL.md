@@ -20,6 +20,7 @@ The router decides or suggests:
 - whether the work should stay local or be split into bounded parallel slices
 - whether cloud or background delegation is worth suggesting
 - which model class should lead the work and which class can safely execute bounded slices
+- whether prior reusable learnings should tighten review, QA, release, or safety expectations
 
 ## Inputs
 
@@ -30,6 +31,7 @@ Inspect these signals:
 - repo signals such as UI, route, release, auth, migration, infra, billing, or security impact
 - verification burden implied by the task
 - whether there are independent bounded slices
+- relevant entries from `.codex/context/LEARNINGS.jsonl` when that store exists
 
 ## Canonical Routing Envelope
 
@@ -198,10 +200,11 @@ Default mixed strategy:
 When the router runs before implementation:
 
 1. Refresh or add a `Routing Snapshot` section in `.codex/context/PLAN.md`.
-2. If `needs_testplan` is true, refresh or add the matching routing and verification posture in `.codex/context/TESTPLAN.md`.
-3. If `suggest_freeze` is true, carry that into the routing snapshot and route to `freeze` before implementation starts.
-4. If `suggest_guard` is true, carry that into the routing snapshot and route to `guard` before the final review or completion summary.
-5. Pass the route forward to `sprint-conductor` so the execution plan and verification plan inherit the same assumptions.
+2. If `.codex/context/LEARNINGS.jsonl` exists, consult the relevant active learnings and use `learn sync-context` to carry the useful ones into the current plan artifacts.
+3. If `needs_testplan` is true, refresh or add the matching routing and verification posture in `.codex/context/TESTPLAN.md`.
+4. If `suggest_freeze` is true, carry that into the routing snapshot and route to `freeze` before implementation starts.
+5. If `suggest_guard` is true, carry that into the routing snapshot and route to `guard` before the final review or completion summary.
+6. Pass the route forward to `sprint-conductor` so the execution plan and verification plan inherit the same assumptions.
 
 The snapshot should capture:
 
@@ -209,6 +212,7 @@ The snapshot should capture:
 - task class
 - complexity, risk, and verification levels
 - model-fit choice
+- relevant learnings when they materially change workflow expectations
 - freeze / guard recommendation
 - required downstream skills
 

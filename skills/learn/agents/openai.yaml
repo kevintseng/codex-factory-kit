@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn"
+  short_description: "Promote reusable workflow learnings into repo-local memory and retrieve relevant guidance for future tasks"
+  default_prompt: "Inspect the repo-local retro, review, QA, and release artifacts, promote only reusable workflow guidance into LEARNINGS.jsonl, retrieve any relevant learnings for the current task, and sync that guidance into PLAN.md and TESTPLAN.md when it should affect execution or verification."

@@ -40,13 +40,15 @@ Template source:
 
 1. Decide whether the task is lightweight mode or full mode.
 2. Read existing `.codex/context/PRODUCT.md` if it exists.
-3. If `factory-router` already ran, preserve and use the existing `Routing Snapshot` in `PLAN.md` and `TESTPLAN.md`.
-4. Map the execution boundary: entry point, touched modules, external dependencies, and likely failure surface.
-5. Write or refresh `PLAN.md`.
-6. In full mode, write or refresh `TESTPLAN.md`.
-7. Choose the minimum useful repo-local agents for the task.
-8. If and only if the user explicitly wants delegation or parallel work, split ownership into disjoint workstreams and use subagents.
-9. In full mode, route follow-up work to `review-gate`, `qa-runtime`, and `document-release` as appropriate.
+3. Read `.codex/context/LEARNINGS.jsonl` when it exists and carry forward only the learnings that materially affect execution or verification.
+4. Use `learn sync-context` when the relevant learnings should be written directly into `PLAN.md` and `TESTPLAN.md`.
+5. If `factory-router` already ran, preserve and use the existing `Routing Snapshot` in `PLAN.md` and `TESTPLAN.md`.
+6. Map the execution boundary: entry point, touched modules, external dependencies, and likely failure surface.
+7. Write or refresh `PLAN.md`.
+8. In full mode, write or refresh `TESTPLAN.md`.
+9. Choose the minimum useful repo-local agents for the task.
+10. If and only if the user explicitly wants delegation or parallel work, split ownership into disjoint workstreams and use subagents.
+11. In full mode, route follow-up work to `review-gate`, `qa-runtime`, and `document-release` as appropriate.
 
 ## Subagent Routing Heuristics
 
@@ -62,6 +64,7 @@ Template source:
 
 - routing snapshot when router guidance already exists
 - goal and scope
+- relevant learnings when they materially affect the workflow
 - smallest coherent change
 - validation path
 - risks and open questions
