@@ -14,6 +14,8 @@ Then read:
 
 Merge that into `~/.codex/AGENTS.md` only if you want the factory loop to become the default.
 
+A good first use after install is to ask `factory-router` whether your next non-trivial task should stay lightweight or use the full loop.
+
 ## Recommended Repo Setup
 
 For repos where you want persistent working memory:

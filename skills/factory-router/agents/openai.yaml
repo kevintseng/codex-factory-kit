@@ -1,0 +1,4 @@
+interface:
+  display_name: "Factory Router"
+  short_description: "Route a task into the right factory workflow path"
+  default_prompt: "Classify this task into lightweight mode or the full loop, recommend the required factory skills, and explain the routing decision."

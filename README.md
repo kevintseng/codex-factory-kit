@@ -19,6 +19,8 @@ It turns larger tasks into a loop:
 
 It also includes a lightweight mode for small tasks so you do not pay the full process cost every time.
 
+For non-trivial work, you can also start with `factory-router` to decide whether a task should stay lightweight or enter the full loop.
+
 ## Who This Is For
 
 This is for you if:
@@ -65,9 +67,18 @@ Vague task
   -> retro
 ```
 
+## Capability Router
+
+The first vNext wedge ships as `factory-router`.
+
+Use it when you want a rule-based routing decision before deeper work starts. It decides whether a task should use lightweight mode or the full loop, and whether follow-up skills such as `office-hours-codex`, `sprint-conductor`, `review-gate`, `qa-runtime`, `document-release`, or `retro` should be used next.
+
+`factory-router` is soft orchestration. It does not claim platform-level enforcement.
+
 ## What Is Included
 
 - global skills for Codex:
+  - `factory-router`
   - `bootstrap-context`
   - `office-hours-codex`
   - `sprint-conductor`
@@ -149,6 +160,7 @@ printf '\n.codex/context/\n' >> .gitignore
 ```
 
 4. Use the lightweight loop for small tasks and the full loop for risky or multi-step tasks.
+5. If you want a routing decision first, start with `factory-router`.
 
 ## Per-Repo Adoption
 
@@ -191,6 +203,9 @@ For a more realistic before/after artifact walkthrough, see [docs/demo.md](docs/
 ## Default Loop
 
 Use the full loop when the task is multi-step, risky, or touches multiple surfaces:
+
+Optional first step:
+- `factory-router`
 
 1. `bootstrap-context`
 2. `office-hours-codex` for vague asks
@@ -250,6 +265,7 @@ This repo intentionally does not include private repo-local agent packs or perso
 ├── AGENTS.md
 ├── install.sh
 ├── skills/
+│   ├── factory-router/
 │   ├── bootstrap-context/
 │   ├── office-hours-codex/
 │   ├── sprint-conductor/

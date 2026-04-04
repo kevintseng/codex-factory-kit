@@ -1,5 +1,26 @@
 # Usage Examples
 
+## Example 0: Task Routing
+
+Task:
+
+> I need to update a signup flow, but I am not sure whether this should stay lightweight or use the full factory loop.
+
+Recommended first step:
+
+- `factory-router`
+
+Expected outcome:
+
+- a routing decision for `lightweight` or `full`
+- a clear list of required next skills
+- explicit reasoning tied to risk and verification burden
+
+Why:
+
+- the first question is not implementation
+- the user needs workflow selection before deeper execution starts
+
 ## Example 1: Small Bug Fix
 
 Task:
