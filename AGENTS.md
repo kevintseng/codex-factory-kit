@@ -137,6 +137,12 @@ Treat `.codex/context/` as local working memory by default unless the repo or te
 
 - Keep docs and release notes aligned with actual shipped behavior.
 - Do not invent capabilities, workflows, or guarantees in documentation.
+
+## Release Policy
+
+- Cut GitHub releases only for shipped functional improvements, meaningful feature additions, or real bug fixes.
+- Do not cut releases for positioning changes, messaging changes, docs-only cleanup, PR workflow changes, or speculative vNext scaffolding.
+- Require a version bump only when users can do something new, an existing workflow materially works better, or a real defect was fixed.
 - Clearly distinguish among current shipped behavior, recommended usage, and vNext proposals.
 
 ## GitHub Messaging Policy
