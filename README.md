@@ -101,6 +101,7 @@ Vague task
   - `FREEZE.md`
 - a suggested global `AGENTS.md` policy
 - an installer that copies skills and templates into `~/.codex`
+- generated contract references under `docs/generated/`
 
 ## Why
 

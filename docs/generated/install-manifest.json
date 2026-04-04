@@ -1,0 +1,53 @@
+{
+  "generated_references": [
+    "docs/generated/skill-index.md",
+    "docs/generated/capability-matrix.md",
+    "docs/generated/AGENTS-routing-snippet.md",
+    "docs/generated/install-upgrade-reference.md",
+    "docs/generated/install-manifest.json"
+  ],
+  "install_targets": {
+    "factory_metadata_root": "~/.codex/factory-kit",
+    "policy_reference": "~/.codex/AGENTS.factory-kit.md",
+    "skills_root": "~/.codex/skills",
+    "templates_root": "~/.codex/templates/factory"
+  },
+  "installed_metadata": [
+    "VERSION",
+    "CHANGELOG.md",
+    "SOURCE_REPO"
+  ],
+  "runtime_state": [
+    "update-state.json"
+  ],
+  "schema_version": 1,
+  "skills": [
+    "bootstrap-context",
+    "document-release",
+    "factory-kit-upgrade",
+    "factory-router",
+    "freeze",
+    "guard",
+    "learn",
+    "office-hours-codex",
+    "qa-runtime",
+    "retro",
+    "review-gate",
+    "sprint-conductor"
+  ],
+  "templates": [
+    "FREEZE.md",
+    "LEARNINGS.jsonl.example",
+    "PLAN.md",
+    "PRODUCT.md",
+    "RELEASE.md",
+    "RETRO.md",
+    "REVIEW.jsonl.example",
+    "TESTPLAN.md"
+  ],
+  "upgrade_commands": [
+    "status",
+    "check-updates",
+    "upgrade"
+  ]
+}

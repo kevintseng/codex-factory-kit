@@ -31,6 +31,7 @@ It adds:
 - `freeze` + `guard` for narrow-scope safety checks
 - `learn` for repo-local reusable workflow guidance that can sync back into planning artifacts
 - `factory-kit-upgrade` for local version reporting, published-release checks, safe refresh, and downgrade protection
+- generated contract references for skill index, capability matrix, AGENTS routing, and install/upgrade behavior
 - repo-local working memory in `.codex/context/`
 - staged execution instead of one-shot prompting
 - structured review gates
@@ -52,6 +53,7 @@ It adds:
 - `freeze` + `guard` for narrow-scope safety checks
 - `learn` for repo-local reusable workflow guidance that can sync back into planning artifacts
 - `factory-kit-upgrade` for local version reporting, published-release checks, safe refresh, and downgrade protection
+- generated contract references for skill index, capability matrix, AGENTS routing, and install/upgrade behavior
 - repo-local working memory in `.codex/context/`
 - staged execution instead of one-shot prompting
 - review gates
@@ -74,6 +76,7 @@ It includes:
 - a shipped safety layer with `freeze` and `guard` for narrow-scope risky changes
 - a shipped `learn` skill for promoting reusable guidance into repo-local memory and syncing it into planning artifacts
 - a shipped `factory-kit-upgrade` skill for local version reporting, published-release checks, safe refresh, and downgrade protection
+- generated reference docs for the shipped skill surface and install/upgrade contract
 - global Codex skills for planning, review, QA, release notes, and retros
 - repo-local working memory in `.codex/context/`
 - reusable templates for `PRODUCT.md`, `PLAN.md`, `TESTPLAN.md`, `REVIEW.jsonl`, `RELEASE.md`, and `RETRO.md`
@@ -122,6 +125,7 @@ What it does:
 - adds shipped `freeze` and `guard` skills for narrow-scope risky changes
 - adds a shipped `learn` skill for durable repo-local guidance across tasks and planning cycles
 - adds a shipped `factory-kit-upgrade` skill for local version reporting, published-release checks, safe refresh, and downgrade protection
+- adds generated references for the skill index, capability matrix, AGENTS routing snippet, and install/upgrade contract
 - adds global Codex skills for planning, review, QA, release notes, and retros
 - adds reusable templates for `PRODUCT.md`, `PLAN.md`, `TESTPLAN.md`, `REVIEW.jsonl`, `RELEASE.md`, and `RETRO.md`
 - keeps project-specific agents local to each repo
