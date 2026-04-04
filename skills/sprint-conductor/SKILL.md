@@ -40,12 +40,13 @@ Template source:
 
 1. Decide whether the task is lightweight mode or full mode.
 2. Read existing `.codex/context/PRODUCT.md` if it exists.
-3. Map the execution boundary: entry point, touched modules, external dependencies, and likely failure surface.
-4. Write or refresh `PLAN.md`.
-5. In full mode, write or refresh `TESTPLAN.md`.
-6. Choose the minimum useful repo-local agents for the task.
-7. If and only if the user explicitly wants delegation or parallel work, split ownership into disjoint workstreams and use subagents.
-8. In full mode, route follow-up work to `review-gate`, `qa-runtime`, and `document-release` as appropriate.
+3. If `factory-router` already ran, preserve and use the existing `Routing Snapshot` in `PLAN.md` and `TESTPLAN.md`.
+4. Map the execution boundary: entry point, touched modules, external dependencies, and likely failure surface.
+5. Write or refresh `PLAN.md`.
+6. In full mode, write or refresh `TESTPLAN.md`.
+7. Choose the minimum useful repo-local agents for the task.
+8. If and only if the user explicitly wants delegation or parallel work, split ownership into disjoint workstreams and use subagents.
+9. In full mode, route follow-up work to `review-gate`, `qa-runtime`, and `document-release` as appropriate.
 
 ## Subagent Routing Heuristics
 
@@ -59,11 +60,14 @@ Template source:
 
 `PLAN.md` should make these explicit:
 
+- routing snapshot when router guidance already exists
 - goal and scope
 - smallest coherent change
 - validation path
 - risks and open questions
 - local work vs delegated work
+
+`TESTPLAN.md` should reflect the router's verification burden when a routing snapshot already exists.
 
 ## Guardrails
 

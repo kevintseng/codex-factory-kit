@@ -16,9 +16,10 @@ Expected artifacts:
 
 Expected flow:
 
-1. `sprint-conductor`
-2. implementation with repo-local agents
-3. optional review if the risk rises
+1. optional `factory-router` if the route is not already obvious
+2. `sprint-conductor`
+3. implementation with repo-local agents
+4. optional review if the risk rises
 
 Why:
 
@@ -46,18 +47,20 @@ Expected artifacts:
 Expected flow:
 
 1. `bootstrap-context` if needed
-2. `office-hours-codex` if the user intent is still vague
-3. `sprint-conductor`
-4. implementation with repo-local frontend or fullstack agents
-5. `review-gate`
-6. `qa-runtime`
-7. `document-release`
+2. `factory-router`
+3. `office-hours-codex` if the user intent is still vague
+4. `sprint-conductor`
+5. implementation with repo-local frontend or fullstack agents
+6. `review-gate`
+7. `qa-runtime`
+8. `document-release`
 
 Why:
 
 - route behavior changed
 - browser verification matters
 - user-visible behavior may need docs or release notes
+- router should classify this as full mode with browser verification and a stronger lead model path
 
 ## Example 3: Risky Backend Change
 
@@ -80,19 +83,21 @@ Expected artifacts:
 
 Expected flow:
 
-1. `office-hours-codex`
-2. `sprint-conductor`
-3. implementation with repo-local domain agents
-4. `review-gate`
-5. targeted runtime or integration verification
-6. `document-release`
-7. `retro`
+1. `factory-router`
+2. `office-hours-codex`
+3. `sprint-conductor`
+4. implementation with repo-local domain agents
+5. `review-gate`
+6. targeted runtime or integration verification
+7. `document-release`
+8. `retro`
 
 Why:
 
 - risk is domain-heavy
 - review needs evidence
 - rollout, rollback, and residual risk should be explicit
+- the router should classify this as a strong path even if the code diff looks small
 
 ## Example 4: Multi-Session Feature Work
 
@@ -115,3 +120,28 @@ Most useful files:
 - `TESTPLAN.md`
 - `REVIEW.jsonl`
 - `RETRO.md`
+
+## Example 5: Route Before Coding
+
+Task:
+
+> I need to update a login funnel, verify it in the browser, and keep the implementation slices bounded.
+
+Recommended first step:
+
+- `factory-router`
+
+Expected route:
+
+- `mode: full`
+- `needs_review_gate: true`
+- `needs_qa_runtime: true`
+- `subagent_strategy: bounded_parallel`
+- `model_fit.lead_model_class: strong`
+- `model_fit.worker_model_class: balanced`
+
+Why:
+
+- the task is multi-surface and browser-facing
+- final routing, integration, and gating should stay on the stronger path
+- bounded implementation slices can still be delegated to a balanced worker path

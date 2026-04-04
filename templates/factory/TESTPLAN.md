@@ -1,5 +1,11 @@
 # Test Plan
 
+## Routing Snapshot
+- Verification level:
+- Model fit:
+- QA runtime required:
+- Review gate required:
+
 ## Critical Paths
 - 
 
@@ -21,4 +27,3 @@
 
 ## Remaining Gaps
 - 
-

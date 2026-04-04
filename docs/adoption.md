@@ -21,6 +21,7 @@ For repos where you want persistent working memory:
 1. create `.codex/context/`
 2. seed it from the factory templates
 3. add `.codex/context/` to `.gitignore`
+4. start non-trivial tasks with `factory-router` when you want explicit route and model-fit guidance
 
 ## Recommended Rollout
 
@@ -34,6 +35,7 @@ A better order is:
 
 ## Where It Helps Most
 
+- repos where users want a recommended route before implementation starts
 - multi-step tasks
 - code review and ship gates
 - browser QA
@@ -45,3 +47,12 @@ A better order is:
 - tiny one-file fixes
 - quick local refactors
 - chores where runtime verification is unnecessary
+
+## New Default Recommendation
+
+For non-trivial work, the best entry point is now:
+
+1. `bootstrap-context` if the repo still lacks `.codex/context/`
+2. `factory-router` to decide lightweight versus full mode and the required gates
+3. `office-hours-codex` only if the ask is still vague
+4. `sprint-conductor` to turn the chosen route into `PLAN.md` and `TESTPLAN.md`

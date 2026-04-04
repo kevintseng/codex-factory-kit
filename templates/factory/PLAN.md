@@ -1,5 +1,12 @@
 # Execution Plan
 
+## Routing Snapshot
+- Mode:
+- Task class:
+- Complexity / risk / verification:
+- Model fit:
+- Required follow-up skills:
+
 ## Goal
 - Desired outcome:
 
@@ -30,4 +37,3 @@
 ## Risks And Open Questions
 - Risk 1:
 - Open question 1:
-
