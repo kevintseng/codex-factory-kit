@@ -33,16 +33,18 @@ In lightweight mode:
 1. If `.codex/context/` does not exist in the repo, use the `bootstrap-context` skill first.
 2. When the task needs explicit routing, use `factory-router` before implementation planning.
 3. For vague product or feature asks, use the `office-hours-codex` skill first.
-4. When the blast radius should stay deliberately narrow, use `freeze` before implementation.
-5. For implementation work, use the `sprint-conductor` skill to create or refresh:
+4. When `.codex/context/LEARNINGS.jsonl` contains relevant guidance for the task, use `learn` to sync that guidance into `PLAN.md` and `TESTPLAN.md`.
+5. When the blast radius should stay deliberately narrow, use `freeze` before implementation.
+6. For implementation work, use the `sprint-conductor` skill to create or refresh:
    - `.codex/context/PLAN.md`
    - `.codex/context/TESTPLAN.md`
-6. Prefer repo-local agents in `.codex/agents/` before falling back to generic global agents.
-7. If a freeze contract exists, use `guard` before merge- or ship-sensitive completion.
-8. Before merge- or ship-sensitive completion, use `review-gate`.
-9. If UI, browser, route, or end-to-end behavior changed, use `qa-runtime`.
-10. If behavior, setup, operations, or external contracts changed, use `document-release`.
-11. After ship or a major completed workflow, use `retro`.
+7. Prefer repo-local agents in `.codex/agents/` before falling back to generic global agents.
+8. If a freeze contract exists, use `guard` before merge- or ship-sensitive completion.
+9. Before merge- or ship-sensitive completion, use `review-gate`.
+10. If UI, browser, route, or end-to-end behavior changed, use `qa-runtime`.
+11. If behavior, setup, operations, or external contracts changed, use `document-release`.
+12. After ship or a major completed workflow, use `retro`.
+13. When the retro exposes reusable cross-task guidance, use `learn` to promote it into `.codex/context/LEARNINGS.jsonl`.
 
 ## Artifact Convention
 
@@ -54,6 +56,7 @@ Prefer repo-local context artifacts under `.codex/context/`:
 - `REVIEW.jsonl`
 - `RELEASE.md`
 - `RETRO.md`
+- `LEARNINGS.jsonl` for reusable cross-task guidance
 - `FREEZE.md` when scope-locking a risky change
 
 Use templates from `$HOME/.codex/templates/factory/` when creating these files.

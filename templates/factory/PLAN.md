@@ -5,8 +5,12 @@
 - Task class:
 - Complexity / risk / verification:
 - Model fit:
+- Relevant learnings:
 - Freeze / guard:
 - Required follow-up skills:
+
+## Relevant Learnings
+- None yet.
 
 ## Goal
 - Desired outcome:

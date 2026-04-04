@@ -4,7 +4,7 @@ Codex Factory Kit is a Codex-native workflow layer for people who want more than
 
 Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-It gives Codex a staged operating model instead of a one-shot prompt habit, and now includes a first-class router for choosing the right path before implementation begins plus a safety layer for keeping risky edits inside a narrow boundary.
+It gives Codex a staged operating model instead of a one-shot prompt habit, and now includes a first-class router for choosing the right path before implementation begins, a safety layer for keeping risky edits inside a narrow boundary, and a learning layer for promoting reusable workflow guidance across tasks.
 
 It turns larger tasks into a loop:
 
@@ -19,6 +19,7 @@ It turns larger tasks into a loop:
 9. verify at runtime
 10. update release notes and docs
 11. write a retro
+12. promote reusable learnings when the lesson should persist
 
 It also includes a lightweight mode for small tasks so you do not pay the full process cost every time, plus model-fit guidance so planning and gates can stay stronger than bounded worker execution.
 
@@ -45,6 +46,7 @@ Codex Factory Kit fixes that by adding durable artifacts inside each repo:
 - `REVIEW.jsonl`
 - `RELEASE.md`
 - `RETRO.md`
+- `LEARNINGS.jsonl` for reusable cross-task guidance
 - `FREEZE.md` when you need to scope-lock a risky change
 
 That gives you:
@@ -70,6 +72,7 @@ Vague task
   -> qa-runtime
   -> document-release
   -> retro
+  -> optional learn
 ```
 
 ## What Is Included
@@ -80,6 +83,7 @@ Vague task
   - `factory-kit-upgrade`
   - `freeze`
   - `guard`
+  - `learn`
   - `office-hours-codex`
   - `sprint-conductor`
   - `review-gate`
@@ -93,6 +97,7 @@ Vague task
   - `REVIEW.jsonl.example`
   - `RELEASE.md`
   - `RETRO.md`
+  - `LEARNINGS.jsonl.example`
   - `FREEZE.md`
 - a suggested global `AGENTS.md` policy
 - an installer that copies skills and templates into `~/.codex`
@@ -109,6 +114,7 @@ Instead of asking Codex to hold the whole project in short-term context every ti
 - `REVIEW.jsonl`
 - `RELEASE.md`
 - `RETRO.md`
+- `LEARNINGS.jsonl`
 
 This makes handoffs, review, QA, and follow-up work materially more stable.
 
@@ -190,6 +196,7 @@ cp ~/.codex/templates/factory/TESTPLAN.md .codex/context/TESTPLAN.md
 cp ~/.codex/templates/factory/RELEASE.md .codex/context/RELEASE.md
 cp ~/.codex/templates/factory/RETRO.md .codex/context/RETRO.md
 : > .codex/context/REVIEW.jsonl
+: > .codex/context/LEARNINGS.jsonl
 printf '\n.codex/context/\n' >> .gitignore
 ```
 
@@ -212,6 +219,8 @@ With Codex Factory Kit:
 3. `qa-runtime` records actual verification evidence in `TESTPLAN.md`
 4. `document-release` updates release notes if behavior changed
 5. `retro` captures what slowed the work down
+6. `learn` promotes the reusable lessons into `LEARNINGS.jsonl`
+7. on the next similar task, `learn sync-context` writes the relevant guidance back into `PLAN.md` and `TESTPLAN.md`
 
 For more concrete examples, see [docs/examples.md](docs/examples.md).
 For a more realistic before/after artifact walkthrough, see [docs/demo.md](docs/demo.md).
@@ -238,6 +247,26 @@ The kit now ships a basic safety layer:
 - `guard` checks the current diff against that freeze contract before the final gate
 
 This is for risky narrow-scope work in large repos, not for every tiny edit. The goal is to make blast-radius control explicit and checkable.
+
+## Learning Layer
+
+The kit now ships a first learning layer:
+
+- `learn` promotes reusable guidance into `.codex/context/LEARNINGS.jsonl`
+- the learning store is repo-local and durable across tasks
+- learnings can be listed, recommended for a new task, synced into plan artifacts, and deactivated when stale
+
+This is not a freeform memory dump. It is for guidance that should change future routing, review, QA, release, or safety behavior.
+
+When a new task matches prior guidance, use:
+
+```bash
+python3 ~/.codex/skills/learn/scripts/factory-kit-learn.py sync-context \
+  --task-class ui_workflow \
+  --tag browser
+```
+
+This refreshes the `Relevant Learnings` section in `.codex/context/PLAN.md` and `.codex/context/TESTPLAN.md`.
 
 ## Versioning, Release Checks, And Upgrade
 

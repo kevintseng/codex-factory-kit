@@ -29,6 +29,7 @@ For repos where you want persistent working memory:
 2. seed it from the factory templates
 3. add `.codex/context/` to `.gitignore`
 4. start non-trivial tasks with `factory-router` when you want explicit route and model-fit guidance
+5. keep `.codex/context/LEARNINGS.jsonl` local and use `learn` only for reusable cross-task guidance
 
 ## Recommended Rollout
 
@@ -64,6 +65,7 @@ For non-trivial work, the best entry point is now:
 3. `office-hours-codex` only if the ask is still vague
 4. `freeze` when the blast radius should stay deliberately narrow
 5. `sprint-conductor` to turn the chosen route into `PLAN.md` and `TESTPLAN.md`
+6. `learn` after `retro` when the repo exposed reusable workflow guidance
 
 If the work is risky but intentionally narrow, add `.codex/context/FREEZE.md` before implementation and run `guard` before the final review gate.
 
@@ -80,3 +82,9 @@ This refreshes the selected `CODEX_HOME` from the current repo checkout. It does
 If you run the installed upgrade script from outside the source checkout, it can reuse the stored source path from install metadata. If that source path is no longer valid, pass `--source-repo /path/to/codex-factory-kit` explicitly.
 
 If you only want to know whether a newer published release exists, use `check-updates`. It compares your local state against the configured GitHub release authority and writes the result to `~/.codex/factory-kit/update-state.json`.
+
+## Learning Recommendation
+
+Do not treat every retro point as durable memory.
+
+Use `learn` only when the lesson should affect future routing, review, QA, release, or safety behavior. Keep the durable store repo-local in `.codex/context/LEARNINGS.jsonl`, use `learn sync-context` to write relevant guidance into `PLAN.md` and `TESTPLAN.md`, and deactivate stale guidance instead of silently rewriting policy files.

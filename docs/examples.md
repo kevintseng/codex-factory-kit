@@ -204,3 +204,32 @@ Why:
 - the task is risky even if the intended scope is small
 - the freeze contract makes the allowed edit boundary explicit
 - the guard check turns “stay in this area only” into a real verification step
+
+## Example 8: Promote A Reusable Learning
+
+Task:
+
+> Over several sessions, checkout funnel edits keep regressing unless browser QA is run.
+
+Recommended mode:
+
+- full mode with learn layer follow-up
+
+Expected artifacts:
+
+- `RETRO.md`
+- `LEARNINGS.jsonl`
+
+Expected flow:
+
+1. `retro`
+2. `learn promote-retro`
+3. on the next similar task, `learn recommend --task-class checkout_flow --tag browser`
+4. `learn sync-context --task-class checkout_flow --tag browser`
+5. `factory-router` or `sprint-conductor` preserves that guidance in the plan
+
+Why:
+
+- the lesson is reusable across tasks, not just one session note
+- the durable store should change future QA expectations
+- stale guidance can be deactivated instead of leaving contradictory memory active

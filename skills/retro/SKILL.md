@@ -32,6 +32,8 @@ Template source:
    - follow-up debt
    - missing agent or tooling support
 4. Update `RETRO.md`.
+5. If the retro exposes reusable cross-task guidance, route to `learn` and promote only the reusable parts into `LEARNINGS.jsonl`.
+6. When the next similar task starts, use `learn sync-context` so the promoted guidance shows up in `PLAN.md` and `TESTPLAN.md`.
 
 ## What To Capture
 
@@ -40,10 +42,10 @@ Template source:
 - what verification caught late
 - which agent instructions were strong or weak
 - the next concrete setup improvement
+- which lessons are reusable enough to be promoted into the learnings store
 
 ## Guardrails
 
 - Prefer specific friction over vague sentiment.
 - Keep the retro honest and operational.
 - If the task was tiny and no meaningful retro exists, record that briefly and stop.
-

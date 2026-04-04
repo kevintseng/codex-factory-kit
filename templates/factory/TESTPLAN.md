@@ -3,9 +3,13 @@
 ## Routing Snapshot
 - Verification level:
 - Model fit:
+- Relevant learnings:
 - Freeze / guard:
 - QA runtime required:
 - Review gate required:
+
+## Relevant Learnings
+- None yet.
 
 ## Critical Paths
 - 
