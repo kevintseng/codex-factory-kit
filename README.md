@@ -19,6 +19,48 @@ If you only need tiny one-off edits, this kit is probably too much process. If y
 - What you get in practice:
   Codex can write or refresh `PLAN.md`, `TESTPLAN.md`, `REVIEW.jsonl`, `RELEASE.md`, `RETRO.md`, and `LEARNINGS.jsonl` inside a repo's `.codex/context/`.
 
+## Beginner Onboarding (Zero Manual Setup)
+
+If you are not a developer, use this path:
+
+```bash
+cd /path/to/codex-factory-kit
+./quickstart.sh --repo /path/to/your/repo
+```
+
+What this command does for you:
+
+1. Installs the kit (if needed).
+2. Initializes the target repo context automatically.
+3. Prints the exact sentence to tell Codex before starting.
+
+If you already know your target repo is the current directory, remove `--repo /path/to/your/repo`:
+
+```bash
+./quickstart.sh
+```
+
+If you want the global policy applied right now (instead of safe-mode), add `--adopt-policy`:
+
+```bash
+./quickstart.sh --repo /path/to/your/repo --adopt-policy
+```
+
+If your environment already has the kit installed and you only need bootstrap, you can skip install:
+
+```bash
+./quickstart.sh --repo /path/to/your/repo --skip-install
+```
+
+Flag behavior for new users:
+
+| Command/Flag | What it means |
+| --- | --- |
+| `init-repo` no `--repo` | Initialize the repo where the command runs. |
+| `init-repo --repo /path/to/repo` | Initialize an explicit path, useful when you run from another folder. |
+| `install.sh` | Install safely. Keeps your existing `~/.codex/AGENTS.md`. |
+| `install.sh --adopt-policy` | Installs and overwrites `~/.codex/AGENTS.md` with the kit policy as default. |
+
 ## You Do Not Need To Learn The Internal Files First
 
 You do not need to understand `.codex/context/`, hidden folders, `AGENTS.md`, or `gitignore` before trying this.

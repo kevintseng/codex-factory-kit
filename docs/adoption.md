@@ -1,7 +1,40 @@
 # Adoption Notes
 
 This page is for rollout and maintenance decisions after the basic install path already makes sense.
-If you are brand new to the kit, start with the README first and come back here later.
+If you are brand new to the kit, use the one-command quick start first and come back here when you want process choices.
+
+## One-Command Starter
+
+For a first run with the least manual work:
+
+```bash
+cd /path/to/codex-factory-kit
+./quickstart.sh --repo /path/to/your/repo
+```
+
+That command does three things:
+
+1. installs the kit if needed (`install.sh`)
+2. initializes the repo context (`init-repo.sh --repo /path/to/your/repo`)
+3. prints the first thing to say to Codex before coding
+
+If the target repo is the current directory:
+
+```bash
+./quickstart.sh
+```
+
+If your environment is already installed and you only want repo bootstrap:
+
+```bash
+./quickstart.sh --repo /path/to/your/repo --skip-install
+```
+
+Add these only when needed:
+
+- `--adopt-policy` to adopt the suggested global policy immediately
+- `--codex-home /path` to target a different `CODEX_HOME`
+
 
 ## Safe First Step
 
@@ -42,6 +75,19 @@ Default path for a target repo:
 ```
 
 That creates any missing `.codex/context/` artifacts and updates `.gitignore` for you.
+
+If you are in the repo directory, you can run it without `--repo`:
+
+```bash
+cd /path/to/repo
+~/.codex/factory-kit/init-repo.sh
+```
+
+If you are in another directory, pass `--repo`:
+
+```bash
+~/.codex/factory-kit/init-repo.sh --repo /path/to/repo
+```
 
 Manual fallback only if you really need it:
 

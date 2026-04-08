@@ -19,6 +19,48 @@ skills、templates、そして推奨される `AGENTS.md` policy を `~/.codex/`
 - 実際に何が得られるか：
   repo の `.codex/context/` に `PLAN.md`、`TESTPLAN.md`、`REVIEW.jsonl`、`RELEASE.md`、`RETRO.md`、`LEARNINGS.jsonl` を残せます。
 
+## 初心者向けセットアップ（手動作業を最小化）
+
+開発経験が少なくても、まずこの 2 行で進められます。
+
+```bash
+cd /path/to/codex-factory-kit
+./quickstart.sh --repo /path/to/your/repo
+```
+
+この 1 つで次を実行します。
+
+1. 必要であれば `install.sh` を実行してキットをインストール
+2. 指定した repo で context を初期化
+3. Codex に最初に伝える 1 文を表示
+
+対象 repo が現在のディレクトリなら、`--repo` を省略できます。
+
+```bash
+./quickstart.sh
+```
+
+推奨 policy を今すぐ既定設定として有効化したい場合は `--adopt-policy` を付けます。
+
+```bash
+./quickstart.sh --repo /path/to/your/repo --adopt-policy
+```
+
+kit が既にインストール済みなら、初期化だけ `--skip-install` できます。
+
+```bash
+./quickstart.sh --repo /path/to/your/repo --skip-install
+```
+
+新規ユーザー向けのフラグ解説：
+
+| コマンド/フラグ | 意味 |
+| --- | --- |
+| `init-repo` に `--repo` 未指定 | コマンドを実行した現在のディレクトリを初期化 |
+| `init-repo --repo /path/to/repo` | 明示したパスを初期化（他ディレクトリから実行する時に有効） |
+| `install.sh` | 既存の `~/.codex/AGENTS.md` を変更しない安全モード |
+| `install.sh --adopt-policy` | `~/.codex/AGENTS.md` を kit policy で上書きして既定化 |
+
 ## 最初に内部ファイルを理解する必要はありません
 
 `.codex/context/`、隠しディレクトリ、`AGENTS.md`、`gitignore` を理解してから始める必要はありません。
