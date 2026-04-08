@@ -66,6 +66,14 @@ parse_args() {
   done
 }
 
+require_git_repo() {
+  if ! git -C "$REPO_PATH" rev-parse --show-toplevel >/dev/null 2>&1; then
+    printf 'Target is not a git repository: %s\n' "$REPO_PATH" >&2
+    printf 'Please run this command in the target repo, or pass --repo with a git repository path.\n' >&2
+    exit 1
+  fi
+}
+
 install_kit() {
   local install_cmd=("$KIT_ROOT/install.sh" --codex-home "$CODEX_HOME")
   if [ "$ADOPT_POLICY" = "true" ]; then
@@ -92,6 +100,8 @@ if [ ! -d "$REPO_PATH" ]; then
   printf 'Target repository does not exist: %s\n' "$REPO_PATH" >&2
   exit 1
 fi
+
+require_git_repo
 
 if [ "$SKIP_INSTALL" != "true" ]; then
   install_kit
