@@ -44,6 +44,26 @@ Create repo-local files under:
 3. For `REVIEW.jsonl` and `LEARNINGS.jsonl`, create empty files instead of copying the example literally.
 4. Do not overwrite filled-in repo artifacts unless the user explicitly asks.
 
+## Commands
+
+Fast path from the target repo:
+
+```bash
+~/.codex/factory-kit/init-repo.sh
+```
+
+To bootstrap a different repo path:
+
+```bash
+~/.codex/factory-kit/init-repo.sh --repo /path/to/repo
+```
+
+Equivalent installed skill script:
+
+```bash
+~/.codex/skills/bootstrap-context/scripts/bootstrap-context.sh
+```
+
 ## Guardrails
 
 - This is initialization, not planning.

@@ -1,79 +1,180 @@
 # Codex Factory Kit
 
-Codex Factory Kit is a Codex-native workflow layer for people who want more than a loose collection of prompts.
+Codex Factory Kit is a workflow pack for Codex users who work in real repositories and want something more repeatable than "paste a prompt and hope the session remembers everything."
 
 Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-It gives Codex a staged operating model instead of a one-shot prompt habit, and now includes a first-class router for choosing the right path before implementation begins, a safety layer for keeping risky edits inside a narrow boundary, and a learning layer for promoting reusable workflow guidance across tasks.
+It installs a set of skills, templates, and a suggested `AGENTS.md` policy into `~/.codex/` so Codex can plan work, keep repo-local context, gate risky changes, and leave behind reusable artifacts.
 
-It turns larger tasks into a loop:
+If you only need tiny one-off edits, this kit is probably too much process. If you regularly do multi-step tasks, code review, browser QA, or multi-session work, this kit can help.
 
-1. bootstrap context
-2. route the task
-3. sharpen the problem if needed
-4. plan execution
-5. optionally freeze scope for risky narrow changes
-6. implement with repo-local agents
-7. guard the diff against the frozen boundary
-8. gate with structured review
-9. verify at runtime
-10. update release notes and docs
-11. write a retro
-12. promote reusable learnings when the lesson should persist
+## The 30-Second Answer
 
-It also includes a lightweight mode for small tasks so you do not pay the full process cost every time, plus model-fit guidance so planning and gates can stay stronger than bounded worker execution.
+- What it is:
+  A Codex workflow kit. It is not an app, daemon, framework, or IDE plugin.
+- What it installs:
+  Skills in `~/.codex/skills/`, templates in `~/.codex/templates/factory/`, and a suggested policy file at `~/.codex/AGENTS.factory-kit.md`.
+- What problem it solves:
+  Codex sessions tend to lose task context, skip planning, and leave weak evidence for review and QA. This kit gives Codex a structured way to leave behind repo-local working memory.
+- What you get in practice:
+  Codex can write or refresh `PLAN.md`, `TESTPLAN.md`, `REVIEW.jsonl`, `RELEASE.md`, `RETRO.md`, and `LEARNINGS.jsonl` inside a repo's `.codex/context/`.
 
-## Who This Is For
+## You Do Not Need To Learn The Internal Files First
 
-This is for you if:
+You do not need to understand `.codex/context/`, hidden folders, `AGENTS.md`, or `gitignore` before trying this.
 
-- you use Codex on real repos, not just toy prompts
+The intended first-run path is:
+
+1. install the kit
+2. optionally activate the suggested policy
+3. run one repo bootstrap command
+4. tell Codex to plan before coding
+
+## When To Use It
+
+This kit is useful when:
+
+- you use Codex on real repos, not toy prompts
+- you want a recommended route before implementation starts
 - you want planning, review, QA, and documentation to compound instead of resetting every session
-- you want repo-local working memory in `.codex/context/`
-- you want small tasks to stay fast while bigger tasks become more reliable
+- you want risky work to have clearer gates and narrower boundaries
+- you expect work to span multiple sessions
 
-This is probably not for you if every task is a tiny one-file edit and you do not want any persistent workflow artifacts.
+This kit is probably not worth it when:
 
-## The Core Idea
+- every task is a tiny one-file edit
+- you do not want persistent workflow artifacts in the repo
+- you just want Codex to make a quick patch and leave
 
-Most AI coding setups fail the same way: every turn tries to reconstruct the whole task from scratch.
+## What It Actually Changes
 
-Codex Factory Kit fixes that by adding durable artifacts inside each repo:
+Without this kit, a lot of Codex work stays implicit:
 
-- `PRODUCT.md`
-- `PLAN.md`
-- `TESTPLAN.md`
-- `REVIEW.jsonl`
-- `RELEASE.md`
-- `RETRO.md`
-- `LEARNINGS.jsonl` for reusable cross-task guidance
-- `FREEZE.md` when you need to scope-lock a risky change
+- what the task scope was
+- what got verified
+- what review found
+- what should be remembered next time
 
-That gives you:
+With this kit, Codex can turn that into explicit repo-local artifacts:
 
-- better multi-session continuity
-- cleaner handoffs between main agent and subagents
-- explicit review and QA evidence
-- less repeated explanation
+- `PRODUCT.md` for a sharper brief when the ask is vague
+- `PLAN.md` for the execution plan
+- `TESTPLAN.md` for verification scope and evidence
+- `REVIEW.jsonl` for review findings and gate status
+- `RELEASE.md` for behavior or setup changes
+- `RETRO.md` for what slowed the work down
+- `LEARNINGS.jsonl` for reusable guidance across future tasks
+- `FREEZE.md` when a risky change needs a narrow edit boundary
 
-## What The Workflow Looks Like
+## Choose One Install Path
+
+Clone this repo somewhere local, then choose one of these:
+
+- Safe install only:
+
+```bash
+./install.sh
+```
+
+- Install and activate the suggested policy now:
+
+```bash
+./install.sh --adopt-policy
+```
+
+Both commands install:
+
+- `skills/*` into `~/.codex/skills/`
+- `templates/factory/*` into `~/.codex/templates/factory/`
+- `AGENTS.md` into `~/.codex/AGENTS.factory-kit.md`
+- `VERSION` and `CHANGELOG.md` into `~/.codex/factory-kit/`
+
+The safe path does not overwrite your existing `~/.codex/AGENTS.md`.
+The activated path copies the suggested policy into `~/.codex/AGENTS.md` for you and becomes the default Codex policy.
+
+Flag behavior in one line:
+
+- `./install.sh` installs the kit only, and leaves your current `~/.codex/AGENTS.md` untouched.
+- `./install.sh --adopt-policy` installs and activates the suggested policy at `~/.codex/AGENTS.md` immediately.
+
+If you want to confirm what is installed later, run:
+
+```bash
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh status
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh check-updates
+```
+
+## 3-Minute Setup
+
+1. Install the kit:
+
+```bash
+git clone https://github.com/kevintseng/codex-factory-kit.git
+cd codex-factory-kit
+./install.sh --adopt-policy
+```
+
+If you prefer to review the policy before activating it, use `./install.sh` instead.
+
+2. Go to the repo where you want to use Codex Factory Kit and run:
+
+```bash
+~/.codex/factory-kit/init-repo.sh
+```
+
+That creates any missing context files and updates `.gitignore` for you.
+
+If your repo is not your current directory, run `~/.codex/factory-kit/init-repo.sh --repo /path/to/repo`.
+
+For the bootstrap helper:
+
+- No `--repo` means: initialize your current directory.
+- `--repo /path/to/repo` means: initialize that exact path (useful when running from another folder).
+
+3. Open Codex in that repo and start with:
 
 ```text
-Vague task
-  -> factory-router
-  -> office-hours-codex
-  -> PRODUCT.md
-  -> sprint-conductor
-  -> PLAN.md + TESTPLAN.md
-  -> optional freeze
-  -> implementation
-  -> optional guard
-  -> review-gate
-  -> qa-runtime
-  -> document-release
-  -> retro
-  -> optional learn
+Plan this task before coding. Keep the workflow lightweight unless risk justifies more.
 ```
+
+4. If the task changes a user flow, ask Codex to verify it before finishing:
+
+```text
+This changes a browser or runtime flow. Verify it before we call it done.
+```
+
+If you are new to this kit, stop here for day one. Install it, bootstrap the repo, and tell Codex to plan first. You do not need the advanced sections below until the work gets bigger or riskier.
+
+## Minimal Daily Use
+
+For a small task:
+
+1. Ask Codex to plan before coding.
+2. Let it refresh the repo plan.
+3. Implement the change.
+4. Skip the rest unless risk rises.
+
+For a bigger or riskier task:
+
+1. bootstrap the repo if you have not done it yet
+2. ask Codex to classify the task before implementation
+3. ask for planning if the task is still vague
+4. let Codex write the plan and test plan
+5. optionally lock the scope before risky narrow-scope work
+6. implementation
+7. optional scope check
+8. structured review
+9. runtime or browser verification when evidence matters
+10. docs or release updates if behavior or setup changed
+11. retro
+12. optional reusable learning capture
+
+Advanced mapping:
+
+- classify the task: `factory-router`
+- write the plan: `sprint-conductor`
+- structured review: `review-gate`
+- runtime verification: `qa-runtime`
 
 ## What Is Included
 
@@ -108,91 +209,42 @@ Vague task
 - an installer that copies skills and templates into `~/.codex`
 - generated contract references under `docs/generated/`
 
-## Why
+## Why The Workflow Exists
 
 The main idea is simple: persistent artifacts beat re-explaining the task every turn.
 
-Instead of asking Codex to hold the whole project in short-term context every time, keep working artifacts in `.codex/context/` inside each repo:
+Instead of asking Codex to hold the whole project in short-term context every time, keep working artifacts in `.codex/context/` inside each repo. That makes handoffs, review, QA, and follow-up work materially more stable.
 
-- `PRODUCT.md`
-- `PLAN.md`
-- `TESTPLAN.md`
-- `REVIEW.jsonl`
-- `RELEASE.md`
-- `RETRO.md`
-- `LEARNINGS.jsonl`
+## What The Workflow Looks Like
 
-This makes handoffs, review, QA, and follow-up work materially more stable.
-
-## Install
-
-Clone this repo somewhere local, then run:
-
-```bash
-./install.sh
-```
-
-This installs:
-
-- `skills/*` into `~/.codex/skills/`
-- `templates/factory/*` into `~/.codex/templates/factory/`
-- `AGENTS.md` into `~/.codex/AGENTS.factory-kit.md`
-- `VERSION` and `CHANGELOG.md` into `~/.codex/factory-kit/`
-
-The installer does not overwrite your existing `~/.codex/AGENTS.md`.
-
-If you want to adopt the suggested global policy, merge or replace it manually:
-
-```bash
-cp ~/.codex/AGENTS.factory-kit.md ~/.codex/AGENTS.md
-```
-
-Only do that if you want this workflow to become your default Codex operating model.
-
-## Quick Start
-
-1. Install the kit:
-
-```bash
-git clone https://github.com/kevintseng/codex-factory-kit.git
-cd codex-factory-kit
-./install.sh
-```
-
-2. Optionally adopt the suggested global policy:
-
-```bash
-cp ~/.codex/AGENTS.factory-kit.md ~/.codex/AGENTS.md
-```
-
-3. In a repo you care about, initialize local working memory:
-
-```bash
-mkdir -p .codex/context
-cp ~/.codex/templates/factory/PLAN.md .codex/context/PLAN.md
-printf '\n.codex/context/\n' >> .gitignore
-```
-
-4. Use the lightweight loop for small tasks and the full loop for risky or multi-step tasks.
-
-For non-trivial work, start with `factory-router` when you want the kit to classify:
-
-- lightweight mode or full mode
-- required follow-up skills
-- model-fit expectations for lead and worker execution
-- whether `freeze` / `guard` should be used to keep the blast radius narrow
-
-To inspect the installed version or refresh your local install from this repo checkout:
-
-```bash
-./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh status
-./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh check-updates
-./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh upgrade
+```text
+Vague task
+  -> factory-router
+  -> office-hours-codex
+  -> PRODUCT.md
+  -> sprint-conductor
+  -> PLAN.md + TESTPLAN.md
+  -> optional freeze
+  -> implementation
+  -> optional guard
+  -> review-gate
+  -> qa-runtime
+  -> document-release
+  -> retro
+  -> optional learn
 ```
 
 ## Per-Repo Adoption
 
-Inside a repo, initialize:
+Default path:
+
+```bash
+~/.codex/factory-kit/init-repo.sh
+```
+
+This creates any missing repo-local artifacts without overwriting existing ones.
+
+Advanced manual fallback:
 
 ```bash
 mkdir -p .codex/context
@@ -205,8 +257,6 @@ cp ~/.codex/templates/factory/RETRO.md .codex/context/RETRO.md
 : > .codex/context/LEARNINGS.jsonl
 printf '\n.codex/context/\n' >> .gitignore
 ```
-
-You can also use the `bootstrap-context` skill to do this incrementally without overwriting existing artifacts.
 
 ## Example Task Flow
 

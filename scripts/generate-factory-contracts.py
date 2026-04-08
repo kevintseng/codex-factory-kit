@@ -224,6 +224,7 @@ def render_install_upgrade_reference(skills: list[dict], templates: list[str]) -
         "- `~/.codex/skills/<skill>/` for each shipped skill",
         "- `~/.codex/templates/factory/*` for shipped templates",
         "- `~/.codex/AGENTS.factory-kit.md` for the suggested global policy",
+        "- `~/.codex/factory-kit/init-repo.sh` for one-command repo bootstrap",
         "- `~/.codex/factory-kit/VERSION`",
         "- `~/.codex/factory-kit/CHANGELOG.md`",
         "- `~/.codex/factory-kit/SOURCE_REPO`",
@@ -265,6 +266,7 @@ def build_install_manifest(skills: list[dict], templates: list[str]) -> dict:
             "templates_root": "~/.codex/templates/factory",
             "policy_reference": "~/.codex/AGENTS.factory-kit.md",
             "factory_metadata_root": "~/.codex/factory-kit",
+            "repo_bootstrap_helper": "~/.codex/factory-kit/init-repo.sh",
         },
         "installed_metadata": [
             "VERSION",

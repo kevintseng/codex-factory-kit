@@ -15,7 +15,8 @@
   - `.codex/context/RELEASE.md`
   - `.codex/context/RETRO.md`
   - `.codex/context/LEARNINGS.jsonl`
-- Executables: none
+- Executables:
+  - `skills/bootstrap-context/scripts/bootstrap-context.sh`
 
 ## Design Review
 

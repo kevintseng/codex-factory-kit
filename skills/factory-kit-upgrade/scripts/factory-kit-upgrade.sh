@@ -473,6 +473,8 @@ run_upgrade() {
     "$CODEX_HOME/factory-kit/INSTALLED_TEMPLATES"
 
   cp "$SOURCE_REPO/AGENTS.md" "$CODEX_HOME/AGENTS.factory-kit.md"
+  cp "$SOURCE_REPO/skills/bootstrap-context/scripts/bootstrap-context.sh" "$CODEX_HOME/factory-kit/init-repo.sh"
+  chmod +x "$CODEX_HOME/factory-kit/init-repo.sh"
   cp "$SOURCE_REPO/VERSION" "$CODEX_HOME/factory-kit/VERSION"
   write_install_metadata "$SOURCE_REPO"
 
@@ -484,6 +486,7 @@ run_upgrade() {
   printf 'codex_home=%s\n' "$CODEX_HOME"
   printf 'version_relation=%s\n' "$relation"
   printf 'installed_version=%s\n' "$(installed_version)"
+  printf 'repo_bootstrap_helper=%s/factory-kit/init-repo.sh\n' "$CODEX_HOME"
 }
 
 run_check_updates() {

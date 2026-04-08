@@ -1,79 +1,180 @@
 # Codex Factory Kit
 
-Codex Factory Kit 是一套给 Codex 使用的工作流层，适合不想只靠零散 prompt 工作的人。
+Codex Factory Kit 是一套给 Codex 用户的 workflow kit，适合在真实 repo 里工作、又不想每次都只靠“打一段 prompt 然后重建一次上下文”的人。
 
 Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-它让 Codex 不再只是一次性提示，而是以分阶段方式完成工作，并且新增了一个可在实现前先选路径的 `factory-router`、一个用来缩小 blast radius 的 safety layer，以及一个可沉淀可复用经验的 learning layer。
+它会把一组 skills、templates，和一份建议使用的 `AGENTS.md` policy 安装到 `~/.codex/`，让 Codex 可以更明确地规划、验证、review，并把工作记忆留在 repo 里。
 
-较大的任务会走这条流程：
+如果你主要只做极小的一文件修补，这套可能太重。如果你常做多步骤任务、需要 review / QA 证据、或工作会跨多个 session，这套就有价值。
 
-1. bootstrap context
-2. 路由任务
-3. 澄清问题
-4. 规划执行
-5. 必要时先 freeze scope
-6. 用 repo-local agents 实现
-7. 用 guard 检查 diff 是否越界
-8. 用结构化 review 做 gate
-9. 在运行时验证
-10. 更新 release notes 和文档
-11. 编写 retro
-12. 将可复用的 learnings 提升成持久 guidance
+## 30 秒看懂这是什么
 
-同时也提供轻量模式，让小任务不需要每次都走完整流程。
+- 它是什么：
+  一套给 Codex 的 workflow kit，不是 app，不是 daemon，也不是 IDE plugin。
+- 它会装什么：
+  `~/.codex/skills/`、`~/.codex/templates/factory/`，以及 `~/.codex/AGENTS.factory-kit.md`。
+- 它解决什么问题：
+  Codex 常见问题是每次 session 都要重建上下文、planning 很隐性、QA/review 没留下清楚证据。这套是把这些流程明文化。
+- 你实际会得到什么：
+  Codex 可以在 repo 的 `.codex/context/` 里维护 `PLAN.md`、`TESTPLAN.md`、`REVIEW.jsonl`、`RELEASE.md`、`RETRO.md`、`LEARNINGS.jsonl` 等 artifact。
 
-## 适合谁
+## 你不用先学会内部文件结构
 
-如果你符合以下情况，这套会很有用：
+你不需要先懂 `.codex/context/`、隐藏文件夹、`AGENTS.md` 或 `gitignore` 才能开始用。
+
+默认的一次上手路径应该是：
+
+1. 安装这套 kit
+2. 视情况决定要不要直接启用建议 policy
+3. 在目标 repo 跑一个初始化命令
+4. 对 Codex 说先规划再写码
+
+## 什么情况下值得用
+
+这套特别适合你，如果：
 
 - 你是在真实 repo 中使用 Codex，而不是玩具示例
+- 你希望实现前先有推荐路径，而不是直接开始 patch
 - 你希望 planning、review、QA、documentation 能跨 session 累积，而不是每次重来
-- 你想把 repo-local working memory 放在 `.codex/context/`
-- 你希望小任务保持快速，大任务则更稳定
+- 你希望高风险工作有更明确的 gate 与边界
+- 你预期工作会跨多个 session
 
-如果你的工作几乎都是极小的一文件修补，而且不想保留任何工作流 artifact，那这套可能偏重。
+这套大概不值得用，如果：
 
-## 核心理念
+- 每次都只是极小的一文件修补
+- 你不想在 repo 里保留任何 workflow artifact
+- 你只想让 Codex 快速改完就走
 
-大多数 AI coding 配置都会遇到同一个问题：每一轮都要重新构建整个任务上下文。
+## 它到底改变了什么
 
-Codex Factory Kit 的做法，是在每个 repo 中加入可持续存在的 artifact：
+没有这套 kit 的情况下，很多事都停留在隐性状态：
 
-- `PRODUCT.md`
-- `PLAN.md`
-- `TESTPLAN.md`
-- `REVIEW.jsonl`
-- `RELEASE.md`
-- `RETRO.md`
-- `LEARNINGS.jsonl`
-- 需要时加入 `FREEZE.md`
+- 这次任务的范围是什么
+- 做过哪些验证
+- review 找到了什么
+- 下次遇到同类问题应该记住什么
 
-这样可以得到：
+有这套 kit 后，Codex 可以把这些变成 repo-local artifact：
 
-- 更好的多 session 连续性
-- 主代理与子代理之间更清晰的交接
-- 明确的 review 与 QA 证据
-- 更少的重复说明
+- `PRODUCT.md`：需求还模糊时，把问题讲清楚
+- `PLAN.md`：执行计划
+- `TESTPLAN.md`：验证范围与证据
+- `REVIEW.jsonl`：review findings 与 gate 状态
+- `RELEASE.md`：行为或 setup 变更
+- `RETRO.md`：这次工作哪里卡、哪里浪费
+- `LEARNINGS.jsonl`：之后同类任务还能复用的 guidance
+- `FREEZE.md`：高风险小范围修改时锁定边界
 
-## 工作流长什么样
+## 选一种安装路径
+
+先把 repo clone 下来，然后选一种：
+
+- 只安装，不直接启用：
+
+```bash
+./install.sh
+```
+
+- 安装并直接启用建议 policy：
+
+```bash
+./install.sh --adopt-policy
+```
+
+这两种都会安装：
+
+- `skills/*` 到 `~/.codex/skills/`
+- `templates/factory/*` 到 `~/.codex/templates/factory/`
+- `AGENTS.md` 到 `~/.codex/AGENTS.factory-kit.md`
+- `VERSION` 与 `CHANGELOG.md` 到 `~/.codex/factory-kit/`
+
+安全路径不会覆盖你原本的 `~/.codex/AGENTS.md`。
+启用路径则会直接帮你把建议 policy 写进 `~/.codex/AGENTS.md`。
+
+参数差异一行看懂：
+
+- `./install.sh`：只安装 kit，不会更改你现有的 `~/.codex/AGENTS.md`。
+- `./install.sh --adopt-policy`：安装并立即把建议 policy 写入 `~/.codex/AGENTS.md`，并作为默认配置启用。
+
+如果你之后想确认目前安装了什么，可执行：
+
+```bash
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh status
+./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh check-updates
+```
+
+## 3 分钟上手
+
+1. 安装这套工具：
+
+```bash
+git clone https://github.com/kevintseng/codex-factory-kit.git
+cd codex-factory-kit
+./install.sh --adopt-policy
+```
+
+如果你想先看过 policy 再决定，改用 `./install.sh`。
+
+2. 到你要使用的 repo 里执行：
+
+```bash
+~/.codex/factory-kit/init-repo.sh
+```
+
+这会自动建立缺少的 context 文件，并帮你更新 `.gitignore`。
+
+如果你现在不在目标 repo 目录，可改为 `~/.codex/factory-kit/init-repo.sh --repo /path/to/repo`。
+
+这个 bootstrap 命令怎么选：
+
+- 不带 `--repo`：在「当前目录」初始化。
+- 带 `--repo /path/to/repo`：在指定路径初始化（适合在其他目录运行时）。
+
+3. 在那个 repo 里打开 Codex，先说：
 
 ```text
-模糊任务
-  -> factory-router
-  -> office-hours-codex
-  -> PRODUCT.md
-  -> sprint-conductor
-  -> PLAN.md + TESTPLAN.md
-  -> optional freeze
-  -> implementation
-  -> optional guard
-  -> review-gate
-  -> qa-runtime
-  -> document-release
-  -> retro
-  -> optional learn
+先规划这个任务再开始写码。除非风险真的高，否则维持轻量流程。
 ```
+
+4. 如果这个任务会改到用户流程，再补一句：
+
+```text
+这会影响 browser 或 runtime flow，完成前请实际验证。
+```
+
+如果你是第一次用这套，先停在这里就够了。先安装、初始化 repo，再让 Codex 先规划后动手。下面那些进阶段落，等任务变大或风险变高时再看。
+
+## 日常最小用法
+
+对小任务：
+
+1. 先叫 Codex 规划再写码
+2. 刷新 repo 里的 plan
+3. 实作
+4. 如果风险没升高，就不用补完整流程
+
+对大任务或高风险任务：
+
+1. repo 还没初始化就先跑 bootstrap
+2. 叫 Codex 先判断这次任务该走哪种流程
+3. 需求还模糊时先把问题讲清楚
+4. 让 Codex 写 `PLAN.md` 和 `TESTPLAN.md`
+5. 高风险小范围修改时可先锁边界
+6. 实作
+7. 必要时检查有没有越界
+8. 结构化 review
+9. 需要 runtime 或 browser 证据时再验证
+10. 行为或 setup 改变时更新文档或 release note
+11. `retro`
+12. 必要时把可复用的经验留下来
+
+进阶对照：
+
+- 判断任务流程：`factory-router`
+- 写计划：`sprint-conductor`
+- 结构化 review：`review-gate`
+- runtime 验证：`qa-runtime`
 
 ## 包含什么
 
@@ -105,94 +206,45 @@ Codex Factory Kit 的做法，是在每个 repo 中加入可持续存在的 arti
   - `LEARNINGS.jsonl.example`
   - `FREEZE.md`
 - 一份建议使用的全局 `AGENTS.md` policy
-- 一个将 skills 与 templates 复制到 `~/.codex` 的安装脚本
+- 一个把 skills 与 templates 复制到 `~/.codex` 的安装脚本
 - 位于 `docs/generated/` 下的 generated contract references
 
-## 为什么这样做
+## 为什么会有这套流程
 
 核心原因很简单：持久化的 artifact 比每次重新解释任务更有效。
 
-不要让 Codex 每次都只依赖短期上下文记住整个项目，而是把工作中的 artifact 放在 repo 内的 `.codex/context/`：
+不要让 Codex 每次都只依赖短期上下文记住整个项目，而是把工作中的 artifact 放在 repo 内的 `.codex/context/`。这样交接、review、QA 和后续工作会稳定很多。
 
-- `PRODUCT.md`
-- `PLAN.md`
-- `TESTPLAN.md`
-- `REVIEW.jsonl`
-- `RELEASE.md`
-- `RETRO.md`
-- `LEARNINGS.jsonl`
+## 工作流长什么样
 
-这会让交接、review、QA 和后续工作稳定很多。
-
-## 安装
-
-先把 repo clone 下来，然后执行：
-
-```bash
-./install.sh
-```
-
-这会安装：
-
-- `skills/*` 到 `~/.codex/skills/`
-- `templates/factory/*` 到 `~/.codex/templates/factory/`
-- `AGENTS.md` 到 `~/.codex/AGENTS.factory-kit.md`
-- `VERSION` 与 `CHANGELOG.md` 到 `~/.codex/factory-kit/`
-
-安装程序不会覆盖你现有的 `~/.codex/AGENTS.md`。
-
-如果你想把建议的全局 policy 变成默认工作方式，可以手动应用：
-
-```bash
-cp ~/.codex/AGENTS.factory-kit.md ~/.codex/AGENTS.md
-```
-
-只有在你确实想让这套 workflow 成为 Codex 默认操作模式时才这样做。
-
-## Quick Start
-
-1. 安装这套工具：
-
-```bash
-git clone https://github.com/kevintseng/codex-factory-kit.git
-cd codex-factory-kit
-./install.sh
-```
-
-2. 如有需要，采用建议的全局 policy：
-
-```bash
-cp ~/.codex/AGENTS.factory-kit.md ~/.codex/AGENTS.md
-```
-
-3. 在你关心的 repo 中初始化本地工作记忆：
-
-```bash
-mkdir -p .codex/context
-cp ~/.codex/templates/factory/PLAN.md .codex/context/PLAN.md
-printf '\n.codex/context/\n' >> .gitignore
-```
-
-4. 小任务走轻量模式，风险更高或多步骤任务走完整流程。
-
-对于非 trivial 的任务，建议先用 `factory-router` 来判断：
-
-- 该走 lightweight mode 还是 full mode
-- 需要哪些后续 skills
-- lead / worker 应采用什么 model-fit
-- 是否需要 `freeze` / `guard` 来缩小 blast radius
-
-如果你要查看已安装版本，或把 `~/.codex` 里的 kit 刷新成当前 repo checkout 的内容，可以执行：
-
-```bash
-./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh status
-./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh check-updates
-./skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh upgrade
+```text
+模糊任务
+  -> factory-router
+  -> office-hours-codex
+  -> PRODUCT.md
+  -> sprint-conductor
+  -> PLAN.md + TESTPLAN.md
+  -> optional freeze
+  -> implementation
+  -> optional guard
+  -> review-gate
+  -> qa-runtime
+  -> document-release
+  -> retro
+  -> optional learn
 ```
 
 ## 每个 Repo 的采用方式
 
-在 repo 内初始化：
+默认路径：
+
+```bash
+~/.codex/factory-kit/init-repo.sh
+```
+
+这会建立缺少的 repo-local artifact，而且不会覆盖已有内容。
+
+进阶手动 fallback：
 
 ```bash
 mkdir -p .codex/context
@@ -205,8 +257,6 @@ cp ~/.codex/templates/factory/RETRO.md .codex/context/RETRO.md
 : > .codex/context/LEARNINGS.jsonl
 printf '\n.codex/context/\n' >> .gitignore
 ```
-
-你也可以用 `bootstrap-context` skill 渐进式地创建这些文件，而不覆盖已有 artifact。
 
 ## 示例任务流程
 

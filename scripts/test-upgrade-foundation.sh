@@ -70,6 +70,12 @@ CODEX_HOME="$TMP_CODEX_HOME" bash ./install.sh
 
 stored_source="$(cat "$TMP_CODEX_HOME/factory-kit/SOURCE_REPO")"
 assert_equals "$stored_source" "$REPO_ROOT" "stored source repo"
+if [ -f "$TMP_CODEX_HOME/AGENTS.md" ]; then
+  fail "install without --adopt-policy should not create AGENTS.md"
+fi
+if [ ! -x "$TMP_CODEX_HOME/factory-kit/init-repo.sh" ]; then
+  fail "install should write an executable repo bootstrap helper"
+fi
 if [ -d "$TMP_CODEX_HOME/skills/stale-skill" ]; then
   fail "install should prune retired tracked skills"
 fi
@@ -84,6 +90,14 @@ if [ ! -f "$TMP_CODEX_HOME/templates/factory/CUSTOM.md" ]; then
 fi
 assert_file_contains "$TMP_CODEX_HOME/factory-kit/INSTALLED_SKILLS" "factory-router"
 assert_file_contains "$TMP_CODEX_HOME/factory-kit/INSTALLED_TEMPLATES" "PLAN.md"
+
+CODEX_HOME="$TMP_CODEX_HOME" bash ./install.sh --adopt-policy >/tmp/codex-factory-kit-install-adopt.log
+if [ ! -f "$TMP_CODEX_HOME/AGENTS.md" ]; then
+  fail "install with --adopt-policy should create AGENTS.md"
+fi
+if ! cmp -s "$REPO_ROOT/AGENTS.md" "$TMP_CODEX_HOME/AGENTS.md"; then
+  fail "adopted AGENTS.md should match the source policy"
+fi
 
 installed_script="$TMP_CODEX_HOME/skills/factory-kit-upgrade/scripts/factory-kit-upgrade.sh"
 status_from_tmp="$(cd /tmp && "$installed_script" status --codex-home "$TMP_CODEX_HOME")"
@@ -117,6 +131,7 @@ allow_output="$(
 )"
 assert_contains "$allow_output" "version_relation=downgrade"
 assert_contains "$allow_output" "installed_version=$(cat "$REPO_ROOT/VERSION")"
+assert_contains "$allow_output" "repo_bootstrap_helper=$TMP_CODEX_HOME/factory-kit/init-repo.sh"
 
 mkdir -p "$TMP_CODEX_HOME/skills/stale-skill"
 printf 'old\n' > "$TMP_CODEX_HOME/skills/stale-skill/SKILL.md"

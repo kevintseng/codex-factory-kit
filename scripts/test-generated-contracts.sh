@@ -45,6 +45,7 @@ assert "LEARNINGS.jsonl.example" in data["templates"]
 assert "check-updates" in data["upgrade_commands"]
 assert "INSTALLED_SKILLS" in data["installed_metadata"]
 assert "INSTALLED_TEMPLATES" in data["installed_metadata"]
+assert data["install_targets"]["repo_bootstrap_helper"] == "~/.codex/factory-kit/init-repo.sh"
 PY
 
 printf 'PASS: generated contracts are up to date\n'

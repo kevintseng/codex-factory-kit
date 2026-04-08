@@ -7,6 +7,7 @@
 - `~/.codex/skills/<skill>/` for each shipped skill
 - `~/.codex/templates/factory/*` for shipped templates
 - `~/.codex/AGENTS.factory-kit.md` for the suggested global policy
+- `~/.codex/factory-kit/init-repo.sh` for one-command repo bootstrap
 - `~/.codex/factory-kit/VERSION`
 - `~/.codex/factory-kit/CHANGELOG.md`
 - `~/.codex/factory-kit/SOURCE_REPO`

@@ -1,18 +1,30 @@
 # Adoption Notes
 
+This page is for rollout and maintenance decisions after the basic install path already makes sense.
+If you are brand new to the kit, start with the README first and come back here later.
+
 ## Safe First Step
 
-Start by installing the skills and templates without changing your global policy:
+Pick one install path:
 
 ```bash
 ./install.sh
 ```
 
-Then read:
+or:
+
+```bash
+./install.sh --adopt-policy
+```
+
+Use the first command if you want to review the suggested policy before activating it.
+Use the second command if you want the factory workflow active right away.
+
+If you used the safe path, then read:
 
 - `~/.codex/AGENTS.factory-kit.md`
 
-Merge that into `~/.codex/AGENTS.md` only if you want the factory loop to become the default.
+The older manual activation step is still possible, but `--adopt-policy` is now the preferred path.
 
 If you want to verify what is installed later, use:
 
@@ -23,13 +35,21 @@ If you want to verify what is installed later, use:
 
 ## Recommended Repo Setup
 
-For repos where you want persistent working memory:
+Default path for a target repo:
+
+```bash
+~/.codex/factory-kit/init-repo.sh
+```
+
+That creates any missing `.codex/context/` artifacts and updates `.gitignore` for you.
+
+Manual fallback only if you really need it:
 
 1. create `.codex/context/`
 2. seed it from the factory templates
 3. add `.codex/context/` to `.gitignore`
-4. start non-trivial tasks with `factory-router` when you want explicit route and model-fit guidance
-5. keep `.codex/context/LEARNINGS.jsonl` local and use `learn` only for reusable cross-task guidance
+
+After bootstrap, start non-trivial tasks with `factory-router` when you want explicit route and model-fit guidance, and keep `.codex/context/LEARNINGS.jsonl` local for reusable cross-task guidance.
 
 ## Recommended Rollout
 
@@ -60,7 +80,7 @@ A better order is:
 
 For non-trivial work, the best entry point is now:
 
-1. `bootstrap-context` if the repo still lacks `.codex/context/`
+1. `~/.codex/factory-kit/init-repo.sh` if the repo still lacks `.codex/context/`
 2. `factory-router` to decide lightweight versus full mode and the required gates
 3. `office-hours-codex` only if the ask is still vague
 4. `freeze` when the blast radius should stay deliberately narrow
