@@ -35,6 +35,20 @@ Flag meanings:
 - `--adopt-policy`: write suggested global policy to `~/.codex/AGENTS.md` now.
 - no `--adopt-policy`: keep your existing `~/.codex/AGENTS.md`.
 
+## 30-Second Checklist
+
+```text
+1) `cd /path/to/codex-factory-kit`
+2) `./quickstart.sh --repo /path/to/your/repo`
+3) Add `--adopt-policy` only if you want immediate policy activation
+4) If target repo is current folder, remove `--repo`
+```
+
+- `--repo`: explicit target repo path
+- no `--repo`: current folder is target
+- `--adopt-policy`: overwrite `~/.codex/AGENTS.md` now
+- no `--adopt-policy`: keep existing `~/.codex/AGENTS.md`
+
 Advanced options:
 
 - `--codex-home /path` to target another CODEX_HOME.
