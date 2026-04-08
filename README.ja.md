@@ -60,6 +60,20 @@ kit がすでに入っている場合は、初期化だけするために `--ski
 - `--adopt-policy`: `~/.codex/AGENTS.md` を推奨 policy で上書き
 - `--adopt-policy` 未指定: 既存の `~/.codex/AGENTS.md` は変更しない
 
+## 30秒チェックリスト
+
+```text
+1) `cd /path/to/codex-factory-kit`
+2) `./quickstart.sh --repo /path/to/your/repo`
+3) すぐに推奨 policy を有効化したい場合は `--adopt-policy` を追加
+4) 対象 repo が現在のフォルダなら `--repo` は省略
+```
+
+- `--repo PATH`: 対象 repo を明示的に指定
+- `--repo` 未指定: 実行中のフォルダを対象 repo として使う
+- `--adopt-policy`: `~/.codex/AGENTS.md` をすぐ上書きして有効化
+- `--adopt-policy` 未指定: 既存の `~/.codex/AGENTS.md` は維持
+
 ## 最初に内部ファイルを理解する必要はありません
 
 `.codex/context/`、隠しディレクトリ、`AGENTS.md`、`gitignore` を理解してから始める必要はありません。

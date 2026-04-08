@@ -60,6 +60,20 @@ cd /path/to/your/repo
 - `--adopt-policy`: 추천 policy를 `~/.codex/AGENTS.md`에 즉시 적용
 - `--adopt-policy` 미지정: 기존 `~/.codex/AGENTS.md`는 유지
 
+## 30초 체크리스트
+
+```text
+1) `cd /path/to/codex-factory-kit`
+2) `./quickstart.sh --repo /path/to/your/repo`
+3) 권장 policy를 바로 적용하려면 `--adopt-policy` 추가
+4) 대상 repo가 현재 폴더면 `--repo` 생략
+```
+
+- `--repo PATH`: 대상 repo를 명시 지정
+- `--repo` 미지정: 현재 실행 폴더를 대상 repo로 사용
+- `--adopt-policy`: `~/.codex/AGENTS.md`를 즉시 덮어써서 활성화
+- `--adopt-policy` 미지정: 기존 `~/.codex/AGENTS.md` 유지
+
 ## 내부 파일을 먼저 배울 필요는 없습니다
 
 `.codex/context/`, 숨김 폴더, `AGENTS.md`, `gitignore`를 먼저 이해하지 않아도 시작할 수 있습니다.

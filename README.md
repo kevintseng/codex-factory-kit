@@ -60,6 +60,20 @@ Quick flag meaning:
 - `--adopt-policy` = write recommended policy to `~/.codex/AGENTS.md` now.
 - no `--adopt-policy` = keep your existing `~/.codex/AGENTS.md` unchanged.
 
+## 30-Second Checklist
+
+```text
+1) `cd /path/to/codex-factory-kit`
+2) `./quickstart.sh --repo /path/to/your/repo`
+3) Add `--adopt-policy` only if you want immediate policy activation
+4) If your target repo is the current folder, omit `--repo`
+```
+
+- `--repo PATH`: explicit target repo path
+- no `--repo`: use current folder as target repo
+- `--adopt-policy`: overwrite `~/.codex/AGENTS.md` now
+- no `--adopt-policy`: keep existing `~/.codex/AGENTS.md`
+
 ## You Do Not Need To Learn The Internal Files First
 
 You do not need to understand `.codex/context/`, hidden folders, `AGENTS.md`, or `gitignore` before trying this.

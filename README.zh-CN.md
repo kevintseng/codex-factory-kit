@@ -60,6 +60,20 @@ cd /path/to/your/repo
 - `--adopt-policy`：立即把建议 policy 写入 `~/.codex/AGENTS.md`。
 - 不写 `--adopt-policy`：保留你现有的 `~/.codex/AGENTS.md`。
 
+## 30 秒清单
+
+```text
+1) `cd /path/to/codex-factory-kit`
+2) `./quickstart.sh --repo /path/to/your/repo`
+3) 要立刻启用建议 policy 就加上 `--adopt-policy`
+4) 目标 repo 就是当前文件夹时，省略 `--repo`
+```
+
+- `--repo PATH`：明确指定目标 repo 路径
+- 不写 `--repo`：使用当前文件夹作为目标 repo
+- `--adopt-policy`：立即覆盖 `~/.codex/AGENTS.md`
+- 不写 `--adopt-policy`：保留现有的 `~/.codex/AGENTS.md`
+
 ## 你不用先学会内部文件结构
 
 你不需要先懂 `.codex/context/`、隐藏文件夹、`AGENTS.md` 或 `gitignore` 才能开始用。
