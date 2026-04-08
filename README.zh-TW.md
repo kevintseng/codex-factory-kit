@@ -1,5 +1,9 @@
 # Codex Factory Kit
 
+<div align="center">
+  <img src="assets/factory-cover.svg" alt="Codex Factory Kit 封面" width="900" />
+</div>
+
 Codex Factory Kit 是一套給 Codex 使用者的 workflow kit，適合在真實 repo 裡工作、又不想每次都只靠「打一段 prompt 然後重建一次上下文」的人。
 
 Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)

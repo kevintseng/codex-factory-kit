@@ -1,5 +1,9 @@
 # Codex Factory Kit
 
+<div align="center">
+  <img src="assets/factory-cover.svg" alt="Codex Factory Kit 표지" width="900" />
+</div>
+
 Codex Factory Kit은 "프롬프트 하나 붙여 넣고 세션이 다 기억해 주길 바라는 방식"보다 더 반복 가능하게 Codex를 쓰고 싶은 사람을 위한 workflow pack입니다.
 
 Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)

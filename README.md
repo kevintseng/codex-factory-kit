@@ -1,5 +1,9 @@
 # Codex Factory Kit
 
+<div align="center">
+  <img src="assets/factory-cover.svg" alt="Codex Factory Kit cover" width="900" />
+</div>
+
 Codex Factory Kit is a workflow pack for Codex users who work in real repositories and want something more repeatable than "paste a prompt and hope the session remembers everything."
 
 Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
