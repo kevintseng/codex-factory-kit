@@ -19,47 +19,46 @@ If you only need tiny one-off edits, this kit is probably too much process. If y
 - What you get in practice:
   Codex can write or refresh `PLAN.md`, `TESTPLAN.md`, `REVIEW.jsonl`, `RELEASE.md`, `RETRO.md`, and `LEARNINGS.jsonl` inside a repo's `.codex/context/`.
 
-## Beginner Onboarding (Zero Manual Setup)
+## Beginner Onboarding (Copy/Paste)
 
-If you are not a developer, use this path:
+For a non-technical first run, do only this:
 
 ```bash
 cd /path/to/codex-factory-kit
 ./quickstart.sh --repo /path/to/your/repo
 ```
 
-What this command does for you:
+That command:
 
-1. Installs the kit (if needed).
-2. Initializes the target repo context automatically.
-3. Prints the exact sentence to tell Codex before starting.
+1. Installs the kit (if not installed).
+2. Initializes the repo context.
+3. Prints the ready-to-say sentence for Codex.
 
-If you already know your target repo is the current directory, remove `--repo /path/to/your/repo`:
+If you are inside the repo already, use:
 
 ```bash
-./quickstart.sh
+cd /path/to/your/repo
+/path/to/codex-factory-kit/quickstart.sh
 ```
 
-If you want the global policy applied right now (instead of safe-mode), add `--adopt-policy`:
+If you want the factory policy active immediately, add `--adopt-policy`:
 
 ```bash
 ./quickstart.sh --repo /path/to/your/repo --adopt-policy
 ```
 
-If your environment already has the kit installed and you only need bootstrap, you can skip install:
+If the kit is already installed and you only need bootstrap, use `--skip-install`.
 
 ```bash
 ./quickstart.sh --repo /path/to/your/repo --skip-install
 ```
 
-Flag behavior for new users:
+Quick flag meaning:
 
-| Command/Flag | What it means |
-| --- | --- |
-| `init-repo` no `--repo` | Initialize the repo where the command runs. |
-| `init-repo --repo /path/to/repo` | Initialize an explicit path, useful when you run from another folder. |
-| `install.sh` | Install safely. Keeps your existing `~/.codex/AGENTS.md`. |
-| `install.sh --adopt-policy` | Installs and overwrites `~/.codex/AGENTS.md` with the kit policy as default. |
+- `--repo PATH` = target repo is the command argument.
+- no `--repo` = target repo is the folder where you run the command.
+- `--adopt-policy` = write recommended policy to `~/.codex/AGENTS.md` now.
+- no `--adopt-policy` = keep your existing `~/.codex/AGENTS.md` unchanged.
 
 ## You Do Not Need To Learn The Internal Files First
 
