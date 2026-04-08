@@ -1,7 +1,7 @@
 # Codex Factory Kit
 
 <div align="center">
-  <img src="assets/factory-cover.svg" alt="Codex Factory Kit カバー" width="900" />
+  <img src="assets/factory-cover-product.svg" alt="Codex Factory Kit カバー" width="900" />
 </div>
 
 Codex Factory Kit は、実際の repo で Codex を使いながら、毎回「プロンプトを投げて文脈を作り直す」運用から抜けたい人向けの workflow kit です。
