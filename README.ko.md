@@ -1,7 +1,7 @@
 # Codex Factory Kit
 
 <div align="center">
-  <img src="assets/factory-cover-product.svg" alt="Codex Factory Kit 표지" width="900" />
+  <img src="assets/factory-cover-product.svg" alt="Codex Factory Kit 표지" width="100%" style="max-width: 960px;" />
 </div>
 
 Codex Factory Kit은 "프롬프트 하나 붙여 넣고 세션이 다 기억해 주길 바라는 방식"보다 더 반복 가능하게 Codex를 쓰고 싶은 사람을 위한 workflow pack입니다.

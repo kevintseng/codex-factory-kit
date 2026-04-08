@@ -1,7 +1,7 @@
 # Codex Factory Kit
 
 <div align="center">
-  <img src="assets/factory-cover-product.svg" alt="Codex Factory Kit 封面" width="900" />
+  <img src="assets/factory-cover-product.svg" alt="Codex Factory Kit 封面" width="100%" style="max-width: 960px;" />
 </div>
 
 Codex Factory Kit 是一套给 Codex 用户的 workflow kit，适合在真实 repo 里工作、又不想每次都只靠“打一段 prompt 然后重建一次上下文”的人。

@@ -1,7 +1,7 @@
 # Codex Factory Kit
 
 <div align="center">
-  <img src="assets/factory-cover-product.svg" alt="Codex Factory Kit cover" width="900" />
+  <img src="assets/factory-cover-product.svg" alt="Codex Factory Kit cover" width="100%" style="max-width: 960px;" />
 </div>
 
 Codex Factory Kit is a workflow pack for Codex users who work in real repositories and want something more repeatable than "paste a prompt and hope the session remembers everything."
