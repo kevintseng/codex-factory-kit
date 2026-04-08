@@ -1,39 +1,44 @@
 # Adoption Notes
 
-This page is for rollout and maintenance decisions after the basic install path already makes sense.
-If you are brand new to the kit, use the one-command quick start first and come back here when you want process choices.
+This page is for rollout and maintenance choices after your first run works.
 
-## One-Command Starter
-
-For a first run with the least manual work:
+If you are brand new, use this and stop here:
 
 ```bash
 cd /path/to/codex-factory-kit
 ./quickstart.sh --repo /path/to/your/repo
 ```
 
-That command does three things:
+That single command:
 
 1. installs the kit if needed (`install.sh`)
-2. initializes the repo context (`init-repo.sh --repo /path/to/your/repo`)
-3. prints the first thing to say to Codex before coding
+2. initializes the target repo (`init-repo.sh --repo /path/to/your/repo`)
+3. prints the sentence to start Codex with
 
-If the target repo is the current directory:
+If you are already inside the target repo:
 
 ```bash
-./quickstart.sh
+cd /path/to/your/repo
+/path/to/codex-factory-kit/quickstart.sh
 ```
 
-If your environment is already installed and you only want repo bootstrap:
+If the kit is already installed:
 
 ```bash
 ./quickstart.sh --repo /path/to/your/repo --skip-install
 ```
 
-Add these only when needed:
+Flag meanings:
 
-- `--adopt-policy` to adopt the suggested global policy immediately
-- `--codex-home /path` to target a different `CODEX_HOME`
+- `--repo PATH`: set the target repo explicitly.
+- no `--repo`: use your current folder.
+- `--adopt-policy`: write suggested global policy to `~/.codex/AGENTS.md` now.
+- no `--adopt-policy`: keep your existing `~/.codex/AGENTS.md`.
+
+Advanced options:
+
+- `--codex-home /path` to target another CODEX_HOME.
+- `--skip-install` to only run repo bootstrap when installed already.
 
 
 ## Safe First Step
